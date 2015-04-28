@@ -232,7 +232,7 @@ public class GdxSetup {
 		}
 	}
 
-	public void build (ProjectBuilder builder, String outputDir, String appName, String packageName, String mainClass,
+	public void build (ProjectBuilder builder, String outputDir, String appName, String gameIdentifier, String packageName, String mainClass,
 		String sdkLocation, CharCallback callback, List<String> gradleArgs) {
 		Project project = new Project();
 
@@ -268,7 +268,7 @@ public class GdxSetup {
 
 		// Assets
 		String assetPath = builder.modules.contains(ProjectType.ANDROID) ? "android/assets" : "core/assets";
-		project.files.add(new ProjectFile("android/assets/badlogic.jpg", assetPath + "/badlogic.jpg", false));
+		project.files.add(new ProjectFile("android/assets/mini2Dx.png", assetPath + "/mini2Dx.png", false));
 
 		// android project
 		if (builder.modules.contains(ProjectType.ANDROID)) {
@@ -323,6 +323,7 @@ public class GdxSetup {
 
 		Map<String, String> values = new HashMap<String, String>();
 		values.put("%APP_NAME%", appName);
+		values.put("%GAME_IDENTIFIER%", gameIdentifier);
 		values.put("%PACKAGE%", packageName);
 		values.put("%PACKAGE_DIR%", packageDir);
 		values.put("%MAIN_CLASS%", mainClass);
@@ -479,6 +480,7 @@ public class GdxSetup {
 			.println("Usage: GdxSetup --dir <dir-name> --name <app-name> --package <package> --mainClass <mainClass> --sdkLocation <SDKLocation>");
 		System.out.println("dir ... the directory to write the project files to");
 		System.out.println("name ... the name of the application");
+		System.out.println("gameIdentifier ... the unique identifier of the game for app stores");
 		System.out.println("package ... the Java package name of the application");
 		System.out.println("mainClass ... the name of your main ApplicationListener");
 		System.out.println("sdkLocation ... the location of your android SDK. Uses ANDROID_HOME if not specified");
@@ -562,7 +564,7 @@ public class GdxSetup {
 
 			builder.buildProject(projects, dependencies);
 			builder.build();
-			new GdxSetup().build(builder, params.get("dir"), params.get("name"), params.get("package"), params.get("mainClass"),
+			new GdxSetup().build(builder, params.get("dir"), params.get("name"), params.get("gameIdentifier"), params.get("package"), params.get("mainClass"),
 				sdkLocation, new CharCallback() {
 					@Override
 					public void character (char c) {

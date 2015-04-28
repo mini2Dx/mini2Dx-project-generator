@@ -127,6 +127,12 @@ public class GdxSetupUI extends JFrame {
 			JOptionPane.showMessageDialog(this, "Please enter a project name.");
 			return;
 		}
+		
+		final String gameIdentifier = ui.form.gameIdentifierText.getText().trim();
+		if (gameIdentifier.length() == 0) {
+			JOptionPane.showMessageDialog(this, "Please enter a game identifier.");
+			return;
+		}
 
 		final String pack = ui.form.packageText.getText().trim();
 		if (pack.length() == 0) {
@@ -236,7 +242,7 @@ public class GdxSetupUI extends JFrame {
 		new Thread() {
 			public void run () {
 				log("Generating app in " + destination);
-				new GdxSetup().build(builder, destination, name, pack, clazz, sdkLocation, new CharCallback() {
+				new GdxSetup().build(builder, destination, name, gameIdentifier, pack, clazz, sdkLocation, new CharCallback() {
 					@Override
 					public void character (char c) {
 						log(c);
@@ -420,10 +426,12 @@ public class GdxSetupUI extends JFrame {
 		ExternalExtensionsDialog externalExtensionsDialog = new ExternalExtensionsDialog(dependencies);
 		JLabel nameLabel = new JLabel("Name:");
 		JTextField nameText = new JTextField("my-gdx-game");
+		JLabel gameIdentifierLabel = new JLabel("Game Identifier:");
+		JTextField gameIdentifierText = new JTextField("com.mystudio.gamename");
 		JLabel packageLabel = new JLabel("Package:");
-		JTextField packageText = new JTextField("com.mygdx.game");
+		JTextField packageText = new JTextField("com.mystudio.gamename");
 		JLabel gameClassLabel = new JLabel("Game class:");
-		JTextField gameClassText = new JTextField("MyGdxGame");
+		JTextField gameClassText = new JTextField("MyMini2DxGame");
 		JLabel destinationLabel = new JLabel("Destination:");
 		JTextField destinationText = new JTextField(new File("test").getAbsolutePath());
 		SetupButton destinationButton = new SetupButton("Browse");
@@ -447,12 +455,14 @@ public class GdxSetupUI extends JFrame {
 
 		private void uiStyle() {
 			nameText.setCaretColor(Color.WHITE);
+			gameIdentifierText.setCaretColor(Color.WHITE);
 			packageText.setCaretColor(Color.WHITE);
 			gameClassText.setCaretColor(Color.WHITE);
 			destinationText.setCaretColor(Color.WHITE);
 			sdkLocationText.setCaretColor(Color.WHITE);
 
 			nameLabel.setForeground(Color.WHITE);
+			gameIdentifierLabel.setForeground(Color.WHITE);
 			packageLabel.setForeground(Color.WHITE);
 			gameClassLabel.setForeground(Color.WHITE);
 			destinationLabel.setForeground(Color.WHITE);
@@ -496,25 +506,28 @@ public class GdxSetupUI extends JFrame {
 			add(nameLabel, new GridBagConstraints(0, 0, 1, 1, 0, 0, EAST, NONE, new Insets(0, 0, 6, 6), 0, 0));
 			add(nameText, new GridBagConstraints(1, 0, 2, 1, 1, 0, CENTER, HORIZONTAL, new Insets(0, 0, 6, 0), 0, 0));
 
-			add(packageLabel, new GridBagConstraints(0, 1, 1, 1, 0, 0, EAST, NONE, new Insets(0, 0, 6, 6), 0, 0));
-			add(packageText, new GridBagConstraints(1, 1, 2, 1, 1, 0, CENTER, HORIZONTAL, new Insets(0, 0, 6, 0), 0, 0));
+			add(gameIdentifierLabel, new GridBagConstraints(0, 1, 1, 1, 0, 0, EAST, NONE, new Insets(0, 0, 6, 6), 0, 0));
+			add(gameIdentifierText, new GridBagConstraints(1, 1, 2, 1, 1, 0, CENTER, HORIZONTAL, new Insets(0, 0, 6, 0), 0, 0));
+			
+			add(packageLabel, new GridBagConstraints(0, 2, 1, 1, 0, 0, EAST, NONE, new Insets(0, 0, 6, 6), 0, 0));
+			add(packageText, new GridBagConstraints(1, 2, 2, 1, 1, 0, CENTER, HORIZONTAL, new Insets(0, 0, 6, 0), 0, 0));
 
-			add(gameClassLabel, new GridBagConstraints(0, 2, 1, 1, 0, 0, EAST, NONE, new Insets(0, 0, 6, 6), 0, 0));
-			add(gameClassText, new GridBagConstraints(1, 2, 2, 1, 1, 0, CENTER, HORIZONTAL, new Insets(0, 0, 6, 0), 0, 0));
+			add(gameClassLabel, new GridBagConstraints(0, 3, 1, 1, 0, 0, EAST, NONE, new Insets(0, 0, 6, 6), 0, 0));
+			add(gameClassText, new GridBagConstraints(1, 3, 2, 1, 1, 0, CENTER, HORIZONTAL, new Insets(0, 0, 6, 0), 0, 0));
 
-			add(destinationLabel, new GridBagConstraints(0, 3, 1, 1, 0, 0, EAST, NONE, new Insets(0, 0, 0, 6), 0, 0));
-			add(destinationText, new GridBagConstraints(1, 3, 1, 1, 1, 0, CENTER, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
-			add(destinationButton, new GridBagConstraints(2, 3, 1, 1, 0, 0, CENTER, NONE, new Insets(0, 6, 0, 0), 0, 0));
+			add(destinationLabel, new GridBagConstraints(0, 4, 1, 1, 0, 0, EAST, NONE, new Insets(0, 0, 0, 6), 0, 0));
+			add(destinationText, new GridBagConstraints(1, 4, 1, 1, 1, 0, CENTER, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
+			add(destinationButton, new GridBagConstraints(2, 4, 1, 1, 0, 0, CENTER, NONE, new Insets(0, 6, 0, 0), 0, 0));
 
 			if (System.getenv("ANDROID_HOME") != null) {
 				sdkLocationText.setText(System.getenv("ANDROID_HOME"));
 			}
-			add(sdkLocationLabel, new GridBagConstraints(0, 4, 1, 1, 0, 0, EAST, NONE, new Insets(0, 0, 0, 6), 0, 0));
-			add(sdkLocationText, new GridBagConstraints(1, 4, 1, 1, 1, 0, CENTER, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
-			add(sdkLocationButton, new GridBagConstraints(2, 4, 1, 1, 0, 0, CENTER, NONE, new Insets(0, 6, 0, 0), 0, 0));
+			add(sdkLocationLabel, new GridBagConstraints(0, 5, 1, 1, 0, 0, EAST, NONE, new Insets(0, 0, 0, 6), 0, 0));
+			add(sdkLocationText, new GridBagConstraints(1, 5, 1, 1, 1, 0, CENTER, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
+			add(sdkLocationButton, new GridBagConstraints(2, 5, 1, 1, 0, 0, CENTER, NONE, new Insets(0, 6, 0, 0), 0, 0));
 
-			add(versionLabel, new GridBagConstraints(0, 5, 1, 1, 0, 0, WEST, WEST, new Insets(20, 0, 0, 0), 0, 0));
-			add(versionButton, new GridBagConstraints(1, 5, 1, 1, 0, 0, WEST, WEST, new Insets(20, 20, 0, 0), 0, 0));
+			add(versionLabel, new GridBagConstraints(0, 6, 1, 1, 0, 0, WEST, WEST, new Insets(20, 0, 0, 0), 0, 0));
+			add(versionButton, new GridBagConstraints(1, 6, 1, 1, 0, 0, WEST, WEST, new Insets(20, 20, 0, 0), 0, 0));
 
 			for (final ProjectType projectType : ProjectType.values()) {
 				if (projectType.equals(ProjectType.CORE)) {
@@ -542,8 +555,8 @@ public class GdxSetupUI extends JFrame {
 				});
 			}
 
-			add(projectsLabel, new GridBagConstraints(0, 6, 1, 1, 0, 0, WEST, WEST, new Insets(20, 0, 0, 0), 0, 0));
-			add(subProjectsPanel, new GridBagConstraints(0, 7, 3, 1, 0, 0, CENTER, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
+			add(projectsLabel, new GridBagConstraints(0, 7, 1, 1, 0, 0, WEST, WEST, new Insets(20, 0, 0, 0), 0, 0));
+			add(subProjectsPanel, new GridBagConstraints(0, 8, 3, 1, 0, 0, CENTER, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
 
 			int depCounter = 0;
 
@@ -590,13 +603,13 @@ public class GdxSetupUI extends JFrame {
 				extensionsPanels.add(extensionPanel);
 			}
 
-			add(extensionsLabel, new GridBagConstraints(0, 8, 1, 1, 0, 0, WEST, WEST, new Insets(20, 0, 0, 0), 0, 0));
-			int rowCounter = 9;
+			add(extensionsLabel, new GridBagConstraints(0, 9, 1, 1, 0, 0, WEST, WEST, new Insets(20, 0, 0, 0), 0, 0));
+			int rowCounter = 10;
 			for (JPanel extensionsPanel : extensionsPanels) {
 				add(extensionsPanel, new GridBagConstraints(0, rowCounter, 3, 1, 0, 0, CENTER, HORIZONTAL, new Insets(5, 0, 0, 0), 0, 0));
 				rowCounter++;
 			}
-			add(showMoreExtensionsButton, new GridBagConstraints(0, 12, 0, 1, 0, 0, CENTER, WEST, new Insets(20, 0, 30, 0), 0, 0));
+			add(showMoreExtensionsButton, new GridBagConstraints(0, 13, 0, 1, 0, 0, CENTER, WEST, new Insets(20, 0, 30, 0), 0, 0));
 		}
 
 		File getDirectory () {
