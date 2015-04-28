@@ -17,15 +17,15 @@ public class BuildScriptHelper {
 		write(wr, "repositories {");
 		write(wr, DependencyBank.mavenCentral);
 		write(wr, "maven { url \"" + DependencyBank.libGDXSnapshotsUrl + "\" }");
-		if (projects.contains(ProjectType.HTML)) {
-			write(wr, DependencyBank.jCenter);
-		}
+		//		if (projects.contains(ProjectType.HTML)) {
+		//			write(wr, DependencyBank.jCenter);
+		//		}
 		write(wr, "}");
 		//dependencies
 		write(wr, "dependencies {");
-		if (projects.contains(ProjectType.HTML)) {
-			write(wr, "classpath '" + DependencyBank.gwtPluginImport + "'");
-		}
+		//		if (projects.contains(ProjectType.HTML)) {
+		//			write(wr, "classpath '" + DependencyBank.gwtPluginImport + "'");
+		//		}
 		if (projects.contains(ProjectType.ANDROID)) {
 			write(wr, "classpath '" + DependencyBank.androidPluginImport + "'");
 		}
@@ -42,10 +42,10 @@ public class BuildScriptHelper {
 		write(wr, "apply plugin: \"eclipse\"");
 		write(wr, "apply plugin: \"idea\"");
 		space(wr);
-		write(wr, "version = '1.0'");
+		write(wr, "version = '1.0.0'");
 		write(wr, "ext {");
 		write(wr, "appName = '%APP_NAME%'");
-		write(wr, "gdxVersion = '" + DependencyBank.libgdxVersion + "'");
+		write(wr, "mini2DxVersion = '" + DependencyBank.mini2DxVersion + "'");
 		write(wr, "roboVMVersion = '" + DependencyBank.roboVMVersion + "'");
 		write(wr, "box2DLightsVersion = '" + DependencyBank.box2DLightsVersion + "'");
 		write(wr, "ashleyVersion = '" + DependencyBank.ashleyVersion + "'");
@@ -56,6 +56,8 @@ public class BuildScriptHelper {
 		write(wr, DependencyBank.mavenCentral);
 		write(wr, "maven { url \"" + DependencyBank.libGDXSnapshotsUrl + "\" }");
 		write(wr, "maven { url \"" + DependencyBank.libGDXReleaseUrl + "\" }");
+		write(wr, "maven { url \"" + DependencyBank.mini2DxSnapshotsUrl + "\" }");
+		write(wr, "maven { url \"" + DependencyBank.mini2DxReleaseUrl + "\" }");
 		write(wr, "}");
 		write(wr, "}");
 	}

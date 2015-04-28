@@ -256,9 +256,9 @@ public class GdxSetup {
 		// core project
 		project.files.add(new ProjectFile("core/build.gradle"));
 		project.files.add(new ProjectFile("core/src/MainClass", "core/src/" + packageDir + "/" + mainClass + ".java", true));
-		if (builder.modules.contains(ProjectType.HTML)) {
-			project.files.add(new ProjectFile("core/CoreGdxDefinition", "core/src/" + mainClass + ".gwt.xml", true));
-		}
+		//		if (builder.modules.contains(ProjectType.HTML)) {
+		//			project.files.add(new ProjectFile("core/CoreGdxDefinition", "core/src/" + mainClass + ".gwt.xml", true));
+		//		}
 
 		// desktop project
 		if (builder.modules.contains(ProjectType.DESKTOP)) {
@@ -288,18 +288,18 @@ public class GdxSetup {
 		}
 
 		// html project
-		if (builder.modules.contains(ProjectType.HTML)) {
-			project.files.add(new ProjectFile("html/build.gradle"));
-			project.files.add(new ProjectFile("html/src/HtmlLauncher", "html/src/" + packageDir + "/client/HtmlLauncher.java", true));
-			project.files.add(new ProjectFile("html/GdxDefinition", "html/src/" + packageDir + "/GdxDefinition.gwt.xml", true));
-			project.files.add(new ProjectFile("html/GdxDefinitionSuperdev", "html/src/" + packageDir + "/GdxDefinitionSuperdev.gwt.xml", true));
-			project.files.add(new ProjectFile("html/war/index", "html/webapp/index.html", true));
-			project.files.add(new ProjectFile("html/war/styles.css", "html/webapp/styles.css", false));
-			project.files.add(new ProjectFile("html/war/refresh.png", "html/webapp/refresh.png", false));
-			project.files.add(new ProjectFile("html/war/soundmanager2-jsmin.js", "html/webapp/soundmanager2-jsmin.js", false));
-			project.files.add(new ProjectFile("html/war/soundmanager2-setup.js", "html/webapp/soundmanager2-setup.js", false));
-			project.files.add(new ProjectFile("html/war/WEB-INF/web.xml", "html/webapp/WEB-INF/web.xml", true));
-		}
+		//		if (builder.modules.contains(ProjectType.HTML)) {
+		//			project.files.add(new ProjectFile("html/build.gradle"));
+		//			project.files.add(new ProjectFile("html/src/HtmlLauncher", "html/src/" + packageDir + "/client/HtmlLauncher.java", true));
+		//			project.files.add(new ProjectFile("html/GdxDefinition", "html/src/" + packageDir + "/GdxDefinition.gwt.xml", true));
+		//			project.files.add(new ProjectFile("html/GdxDefinitionSuperdev", "html/src/" + packageDir + "/GdxDefinitionSuperdev.gwt.xml", true));
+		//			project.files.add(new ProjectFile("html/war/index", "html/webapp/index.html", true));
+		//			project.files.add(new ProjectFile("html/war/styles.css", "html/webapp/styles.css", false));
+		//			project.files.add(new ProjectFile("html/war/refresh.png", "html/webapp/refresh.png", false));
+		//			project.files.add(new ProjectFile("html/war/soundmanager2-jsmin.js", "html/webapp/soundmanager2-jsmin.js", false));
+		//			project.files.add(new ProjectFile("html/war/soundmanager2-setup.js", "html/webapp/soundmanager2-setup.js", false));
+		//			project.files.add(new ProjectFile("html/war/WEB-INF/web.xml", "html/webapp/WEB-INF/web.xml", true));
+		//		}
 
 		// ios robovm
 		if (builder.modules.contains(ProjectType.IOS)) {
@@ -331,9 +331,9 @@ public class GdxSetup {
 		values.put("%BUILD_TOOLS_VERSION%", DependencyBank.buildToolsVersion);
 		values.put("%API_LEVEL%", DependencyBank.androidAPILevel);
 		values.put("%GWT_VERSION%", DependencyBank.gwtVersion);
-		if (builder.modules.contains(ProjectType.HTML)) {
-			values.put("%GWT_INHERITS%", parseGwtInherits(builder));
-		}
+		//		if (builder.modules.contains(ProjectType.HTML)) {
+		//			values.put("%GWT_INHERITS%", parseGwtInherits(builder));
+		//		}
 
 		copyAndReplace(outputDir, project, values);
 
@@ -556,10 +556,9 @@ public class GdxSetup {
 			projects.add(ProjectType.DESKTOP);
 			projects.add(ProjectType.ANDROID);
 			projects.add(ProjectType.IOS);
-			projects.add(ProjectType.HTML);
 
 			List<Dependency> dependencies = new ArrayList<Dependency>();
-			dependencies.add(bank.getDependency(ProjectDependency.GDX));
+			dependencies.add(bank.getDependency(ProjectDependency.MINI2DX));
 
 			builder.buildProject(projects, dependencies);
 			builder.build();

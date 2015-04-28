@@ -92,7 +92,7 @@ public class GdxSetupUI extends JFrame {
 	static Point point = new Point();
 
 	public GdxSetupUI () {
-		setTitle("LibGDX Project Generator");
+		setTitle("mini2Dx Project Generator");
 		setLayout(new BorderLayout());
 		add(ui, BorderLayout.CENTER);
 		setSize(620, 720);
@@ -117,7 +117,7 @@ public class GdxSetupUI extends JFrame {
 
 		builder = new ProjectBuilder(new DependencyBank());
 		modules.add(ProjectType.CORE);
-		dependencies.add(builder.bank.getDependency(ProjectDependency.GDX));
+		dependencies.add(builder.bank.getDependency(ProjectDependency.MINI2DX));
 		dependencies.add(builder.bank.getDependency(ProjectDependency.BOX2D));
 	}
 
@@ -289,7 +289,7 @@ public class GdxSetupUI extends JFrame {
 		JScrollPane scrollPane = new JScrollPane(textArea);
 		JPanel title = new JPanel();
 		JPanel topBar = new JPanel();
-		JLabel windowLabel = new JLabel("    Libgdx Project Generator");
+		JLabel windowLabel = new JLabel("    mini2Dx Project Generator");
 		JButton exit;
 		JButton minimize;
 		JLabel logo;
@@ -432,10 +432,10 @@ public class GdxSetupUI extends JFrame {
 		SetupButton sdkLocationButton = new SetupButton("Browse");
 
 		JPanel subProjectsPanel = new JPanel(new GridLayout());
-		JLabel versionLabel = new JLabel("LibGDX Version");
-		JComboBox versionButton = new JComboBox(new String[] {"Release " + DependencyBank.libgdxVersion});
+		JLabel versionLabel = new JLabel("mini2Dx Version");
+		JComboBox versionButton = new JComboBox(new String[] {"Release " + DependencyBank.mini2DxVersion});
 		JLabel projectsLabel = new JLabel("Sub Projects");
-		JLabel extensionsLabel = new JLabel("Extensions");
+		JLabel extensionsLabel = new JLabel("LibGDX Extensions");
 		List<JPanel> extensionsPanels = new ArrayList<JPanel>();
 		SetupButton showMoreExtensionsButton = new SetupButton("Show Third Party Extensions");
 
@@ -521,7 +521,7 @@ public class GdxSetupUI extends JFrame {
 					continue;
 				}
 				modules.add(projectType);
-				SetupCheckBox checkBox = new SetupCheckBox(projectType.getName().substring(0, 1).toUpperCase() + projectType.getName().substring(1, projectType.getName().length()));
+				SetupCheckBox checkBox = new SetupCheckBox(projectType.getName().toUpperCase());
 				checkBox.setSelected(true);
 				subProjectsPanel.add(checkBox);
 				checkBox.addItemListener(new ItemListener() {
@@ -552,7 +552,7 @@ public class GdxSetupUI extends JFrame {
 				while (depCounter < ProjectDependency.values().length) {
 					if (ProjectDependency.values()[depCounter] != null) {
 						final ProjectDependency projDep = ProjectDependency.values()[depCounter];
-						if (projDep.equals(ProjectDependency.GDX)) {
+						if (projDep.equals(ProjectDependency.MINI2DX)) {
 							depCounter++;
 							continue;
 						}

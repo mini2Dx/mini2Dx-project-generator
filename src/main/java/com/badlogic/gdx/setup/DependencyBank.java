@@ -6,9 +6,7 @@ import java.util.HashMap;
 public class DependencyBank {
 
 	//Versions
-	static String libgdxVersion = "1.5.6";
-	//Temporary snapshot version, we need a more dynamic solution for pointing to the latest nightly
-	static String libgdxNightlyVersion = "1.5.7-SNAPSHOT";
+	static String mini2DxVersion = "1.0.0";
 	static String roboVMVersion = "1.0.0";
 	static String buildToolsVersion = "20.0.0";
 	static String androidAPILevel = "20";
@@ -19,6 +17,8 @@ public class DependencyBank {
 	static String jCenter = "jcenter()";
 	static String libGDXSnapshotsUrl = "https://oss.sonatype.org/content/repositories/snapshots/";
 	static String libGDXReleaseUrl = "https://oss.sonatype.org/content/repositories/releases/";
+	static String mini2DxSnapshotsUrl = "https://oss.sonatype.org/content/repositories/snapshots/";
+	static String mini2DxReleaseUrl = "https://oss.sonatype.org/content/repositories/releases/";
 
 	//Project plugins
 	static String gwtPluginImport = "de.richsource.gradle.plugins:gwt-gradle-plugin:0.6";
@@ -39,8 +39,7 @@ public class DependencyBank {
 					projectDep.getDependencies(ProjectType.CORE),
 					projectDep.getDependencies(ProjectType.DESKTOP),
 					projectDep.getDependencies(ProjectType.ANDROID),
-					projectDep.getDependencies(ProjectType.IOS),
-					projectDep.getDependencies(ProjectType.HTML));
+					projectDep.getDependencies(ProjectType.IOS));
 			gdxDependencies.put(projectDep, dependency);
 		}
 	}
@@ -60,15 +59,15 @@ public class DependencyBank {
 	 * FreeTypeFont for gwt, an exception is thrown so the user can be notified of incompatability
 	 */
 	public enum ProjectDependency {
-		GDX(
-			new String[]{"com.badlogicgames.gdx:gdx:$gdxVersion"},
-			new String[]{"com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion", "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"},
-			new String[]{"com.badlogicgames.gdx:gdx-backend-android:$gdxVersion", "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi", "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi-v7a", "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86"},
-			new String[]{"org.robovm:robovm-rt:${roboVMVersion}", "org.robovm:robovm-cocoatouch:${roboVMVersion}", "com.badlogicgames.gdx:gdx-backend-robovm:$gdxVersion", "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-ios"},
-			new String[]{"com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion", "com.badlogicgames.gdx:gdx:$gdxVersion:sources", "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion:sources"},
-			new String[]{"com.badlogic.gdx.backends.gdx_backends_gwt"},
+		MINI2DX(
+			new String[]{"org.mini2Dx:mini2Dx-core:$mini2DxVersion"},
+			new String[]{"org.mini2Dx:mini2Dx-desktop:$mini2DxVersion"},
+			new String[]{"org.mini2Dx:mini2Dx-android:$mini2DxVersion", "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi", "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi-v7a", "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86"},
+			new String[]{"org.mini2Dx:mini2Dx-ios:$mini2DxVersion", "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-ios"},
+			null,
+			null,
 			
-			"Core Library for LibGDX"
+			"Core Library for mini2Dx"
 		),
 		BULLET(
 			new String[]{"com.badlogicgames.gdx:gdx-bullet:$gdxVersion"},
@@ -80,16 +79,6 @@ public class DependencyBank {
 			
 			"3D Collision Detection and Rigid Body Dynamics"
 		),
-		FREETYPE(
-			new String[]{"com.badlogicgames.gdx:gdx-freetype:$gdxVersion"},
-			new String[]{"com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"},
-			new String[]{"com.badlogicgames.gdx:gdx-freetype:$gdxVersion", "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-armeabi", "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-armeabi-v7a", "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86"},
-			new String[]{"com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-ios"},
-			null,
-			null,
-			
-			"Generate BitmapFonts from .ttf font files"
-		),
 		TOOLS(
 			new String[]{},
 			new String[]{"com.badlogicgames.gdx:gdx-tools:$gdxVersion"},
@@ -99,16 +88,6 @@ public class DependencyBank {
 			new String[]{},
 			
 			"Collection of tools, including 2D/3D particle editors, texture packers, and file processors"
-		),
-		CONTROLLERS(
-			new String[]{"com.badlogicgames.gdx:gdx-controllers:$gdxVersion"},
-			new String[]{"com.badlogicgames.gdx:gdx-controllers-desktop:$gdxVersion", "com.badlogicgames.gdx:gdx-controllers-platform:$gdxVersion:natives-desktop"},
-			new String[]{"com.badlogicgames.gdx:gdx-controllers:$gdxVersion", "com.badlogicgames.gdx:gdx-controllers-android:$gdxVersion"},
-			new String[]{}, // works on iOS but never reports any controllers :)
-			new String[]{"com.badlogicgames.gdx:gdx-controllers:$gdxVersion:sources", "com.badlogicgames.gdx:gdx-controllers-gwt:$gdxVersion", "com.badlogicgames.gdx:gdx-controllers-gwt:$gdxVersion:sources"},
-			new String[]{"com.badlogic.gdx.controllers.controllers-gwt"},
-
-			"Controller/Gamepad API"
 		),
 		BOX2D(
 			new String[]{"com.badlogicgames.gdx:gdx-box2d:$gdxVersion"},
@@ -179,8 +158,8 @@ public class DependencyBank {
 					return androidDependencies;
 				case IOS:
 					return iosDependencies;
-				case HTML:
-					return gwtDependencies;
+				//				case HTML:
+				//					return gwtDependencies;
 			}
 			return null;
 		}
@@ -199,8 +178,7 @@ public class DependencyBank {
 		CORE("core", new String[]{"java"}),
 		DESKTOP("desktop", new String[]{"java"}),
 		ANDROID("android", new String[]{"android"}),
-		IOS("ios", new String[]{"java", "robovm"}),
-		HTML("html", new String[]{"gwt", "war"});
+		IOS("ios", new String[]{"java", "robovm"});
 
 		private final String name;
 		private final String[] plugins;
