@@ -1,2 +1,4 @@
 # mini2Dx-setup
-Fork of LibGDX project setup app customised for mini2Dx
+An app for creating new mini2Dx projects.
+
+Forked from the LibGDX project setup app and customised for mini2Dx.
