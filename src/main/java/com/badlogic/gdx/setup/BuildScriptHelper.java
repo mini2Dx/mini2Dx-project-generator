@@ -56,7 +56,7 @@ public class BuildScriptHelper {
 		write(wr, DependencyBank.mavenCentral);
 		write(wr, "maven { url \"" + DependencyBank.libGDXSnapshotsUrl + "\" }");
 		write(wr, "maven { url \"" + DependencyBank.libGDXReleaseUrl + "\" }");
-		write(wr, "maven { url \"" + DependencyBank.mini2DxSnapshotsUrl + "\" }");
+		write(wr, "maven { url \"" + DependencyBank.mini2DxThirdPartyUrl + "\" }");
 		write(wr, "maven { url \"" + DependencyBank.mini2DxReleaseUrl + "\" }");
 		write(wr, "}");
 		write(wr, "}");

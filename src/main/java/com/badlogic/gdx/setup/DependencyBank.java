@@ -17,8 +17,8 @@ public class DependencyBank {
 	static String jCenter = "jcenter()";
 	static String libGDXSnapshotsUrl = "https://oss.sonatype.org/content/repositories/snapshots/";
 	static String libGDXReleaseUrl = "https://oss.sonatype.org/content/repositories/releases/";
-	static String mini2DxSnapshotsUrl = "https://oss.sonatype.org/content/repositories/snapshots/";
-	static String mini2DxReleaseUrl = "https://oss.sonatype.org/content/repositories/releases/";
+	static String mini2DxThirdPartyUrl = "http://maven.mini2dx.org/content/repositories/thirdparty/";
+	static String mini2DxReleaseUrl = "http://maven.mini2dx.org/content/repositories/releases/";
 
 	//Project plugins
 	static String gwtPluginImport = "de.richsource.gradle.plugins:gwt-gradle-plugin:0.6";
