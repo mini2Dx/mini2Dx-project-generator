@@ -6,18 +6,21 @@ import java.util.HashMap;
 public class DependencyBank {
 
 	//Versions
-	static String mini2DxVersion = "1.0.0";
+	static String libGDXVersion = "1.5.4";
+	static String mini2DxVersion = "1.0.0-SNAPSHOT";
 	static String roboVMVersion = "1.0.0";
 	static String buildToolsVersion = "20.0.0";
 	static String androidAPILevel = "20";
 	static String gwtVersion = "2.6.0";
 
 	//Repositories
+	static String mavenLocal = "mavenLocal()";
 	static String mavenCentral = "mavenCentral()";
 	static String jCenter = "jcenter()";
 	static String libGDXSnapshotsUrl = "https://oss.sonatype.org/content/repositories/snapshots/";
 	static String libGDXReleaseUrl = "https://oss.sonatype.org/content/repositories/releases/";
 	static String mini2DxThirdPartyUrl = "http://maven.mini2dx.org/content/repositories/thirdparty/";
+	static String mini2DxSnapshotsUrl = "http://maven.mini2dx.org/content/repositories/snapshots/";
 	static String mini2DxReleaseUrl = "http://maven.mini2dx.org/content/repositories/releases/";
 
 	//Project plugins

@@ -13,6 +13,11 @@ android {
 
         instrumentTest.setRoot('tests')
     }
+	packagingOptions {
+		exclude 'META-INF/LICENSE.txt'
+		exclude 'META-INF/NOTICE.txt'
+		exclude 'rebel.xml'
+	}
 }
 
 // needed to add JNI shared libraries to APK when compiling on CLI

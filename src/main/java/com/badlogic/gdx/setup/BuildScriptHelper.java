@@ -46,6 +46,7 @@ public class BuildScriptHelper {
 		write(wr, "ext {");
 		write(wr, "appName = '%APP_NAME%'");
 		write(wr, "mini2DxVersion = '" + DependencyBank.mini2DxVersion + "'");
+		write(wr, "gdxVersion = '" + DependencyBank.libGDXVersion + "'");
 		write(wr, "roboVMVersion = '" + DependencyBank.roboVMVersion + "'");
 		write(wr, "box2DLightsVersion = '" + DependencyBank.box2DLightsVersion + "'");
 		write(wr, "ashleyVersion = '" + DependencyBank.ashleyVersion + "'");
@@ -53,10 +54,12 @@ public class BuildScriptHelper {
 		write(wr, "}");
 		space(wr);
 		write(wr, "repositories {");
+		write(wr, DependencyBank.mavenLocal);
 		write(wr, DependencyBank.mavenCentral);
 		write(wr, "maven { url \"" + DependencyBank.libGDXSnapshotsUrl + "\" }");
 		write(wr, "maven { url \"" + DependencyBank.libGDXReleaseUrl + "\" }");
 		write(wr, "maven { url \"" + DependencyBank.mini2DxThirdPartyUrl + "\" }");
+		write(wr, "maven { url \"" + DependencyBank.mini2DxSnapshotsUrl + "\" }");
 		write(wr, "maven { url \"" + DependencyBank.mini2DxReleaseUrl + "\" }");
 		write(wr, "}");
 		write(wr, "}");
