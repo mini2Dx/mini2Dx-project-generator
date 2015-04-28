@@ -1,0 +1,80 @@
+buildscript {
+    repositories {
+    	mavenLocal()
+        mavenCentral()
+        maven { url 'https://github.com/steffenschaefer/gwt-gradle-plugin/raw/maven-repo/' }
+        jcenter()
+    }
+    dependencies {
+		classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.6'
+        classpath 'com.android.tools.build:gradle:1.0.0'
+        classpath 'org.robovm:robovm-gradle-plugin:1.0.0'
+    }
+}
+
+apply plugin: "eclipse"
+apply plugin: "idea"
+apply plugin: "maven"
+apply plugin: "java"
+    
+group = 'org.mini2Dx'
+version = '1.0.0-SNAPSHOT'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+uploadArchives {
+	repositories {
+		mavenDeployer {
+			repository(url: "http://maven.mini2dx.org/content/repositories/releases") {
+				if(project.hasProperty('mini2DxMavenUser')) {
+					authentication(userName: project.property('mini2DxMavenUser'), password: project.property('mini2DxMavenPassword'))
+				}
+			}
+			snapshotRepository(url: "http://maven.mini2dx.org/content/repositories/snapshots") {
+				if(project.hasProperty('mini2DxMavenUser')) {
+					authentication(userName: project.property('mini2DxMavenUser'), password: project.property('mini2DxMavenPassword'))
+				}
+			}
+		}
+	}
+}
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+	maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+	maven { url "https://oss.sonatype.org/content/repositories/releases/" }
+}
+
+ext {
+	gdxVersion="1.5.5"
+	roboVMVersion="1.0.0"
+	androidVersion="4.4"
+	beanutilsVersion="1.8.3"
+	langVersion="3.1"
+	reflectionsVersion="0.9.9-RC1"
+	simpleXmlVersion="2.7.1"
+	gsonVersion="2.3"
+	
+	junitVersion="4.8.1"
+	jmockVersion="2.5.1"
+	
+	//org.gradle.daemon="true"
+	//org.gradle.jvmargs="-Xms128m -Xmx256m"
+	//org.gradle.configureondemand="true"
+}
+
+tasks.eclipse.doLast {
+	delete ".project"
+}
+
+dependencies {
+	testCompile "junit:junit:$junitVersion"
+	testCompile "org.jmock:jmock-junit4:$jmockVersion"
+	testCompile "org.jmock:jmock-legacy:$jmockVersion"
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.2'
+}
