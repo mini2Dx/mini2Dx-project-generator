@@ -3,12 +3,14 @@ buildscript {
     	mavenLocal()
         mavenCentral()
         maven { url 'https://github.com/steffenschaefer/gwt-gradle-plugin/raw/maven-repo/' }
+		maven { url "http://maven.mini2dx.org/content/repositories/releases" }
         jcenter()
     }
     dependencies {
 		classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.6'
         classpath 'com.android.tools.build:gradle:1.0.0'
         classpath 'org.robovm:robovm-gradle-plugin:1.0.0'
+		classpath 'com.battlebardgames.parcl:parcl:1.0.5'
     }
 }
 
@@ -16,12 +18,16 @@ apply plugin: "eclipse"
 apply plugin: "idea"
 apply plugin: "maven"
 apply plugin: "java"
+apply plugin: "application"
+apply plugin: "com.battlebardgames.parcl"
     
 group = 'org.mini2Dx'
 version = '1.0.0-SNAPSHOT'
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
+
+mainClassName = "com.badlogic.gdx.setup.GdxSetupUI"
 
 uploadArchives {
 	repositories {
@@ -77,4 +83,26 @@ dependencies {
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.2'
+}
+
+parcl {
+	exe {
+		vmArgs = ["-Xmx512m"]
+		exeName = "mini2Dx-project-generator"
+	}
+
+	app {
+		vmArgs = ["-Xmx512m"]
+		appName = "mini2Dx Project Generator"
+		icon = "mini2Dx.icns"
+		applicationCategory = "public.app-category.developer-tools"
+		displayName = 'mini2Dx Project Generator'
+		identifier = 'org.mini2Dx.setup'
+		copyright = 'Copyright 2015 mini2Dx'
+	}
+
+	linux {
+		vmArgs = ["-Xmx512m"]
+		binName = "mini2Dx-project-generator"
+	}
 }
