@@ -3,6 +3,7 @@ buildscript {
     	mavenLocal()
         mavenCentral()
         maven { url 'https://github.com/steffenschaefer/gwt-gradle-plugin/raw/maven-repo/' }
+	maven { url "http://maven.mini2dx.org/content/repositories/thirdparty/" }
 		maven { url "http://maven.mini2dx.org/content/repositories/releases" }
         jcenter()
     }
