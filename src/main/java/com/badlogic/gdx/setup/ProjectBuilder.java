@@ -17,9 +17,11 @@ public class ProjectBuilder {
 	List<Dependency> dependencies = new ArrayList<Dependency>();
 	File settingsFile;
 	File buildFile;
+	Release release;
 
-	public ProjectBuilder(DependencyBank bank) {
+	public ProjectBuilder(DependencyBank bank, Release release) {
 		this.bank = bank;
+		this.release = release;
 	}
 
 	public List<String> buildProject(List<ProjectType> projects, List<Dependency> dependencies) {
@@ -63,8 +65,8 @@ public class ProjectBuilder {
 			FileWriter buildWriter = new FileWriter(buildFile.getAbsoluteFile());
 			BufferedWriter buildBw = new BufferedWriter(buildWriter);
 
-			BuildScriptHelper.addBuildScript(modules, buildBw);
-			BuildScriptHelper.addAllProjects(buildBw);
+			BuildScriptHelper.addBuildScript(modules, buildBw, release);
+			BuildScriptHelper.addAllProjects(buildBw, release);
 			for (ProjectType module : modules) {
 				BuildScriptHelper.addProject(module, dependencies, buildBw);
 			}

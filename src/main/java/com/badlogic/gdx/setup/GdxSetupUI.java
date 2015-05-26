@@ -47,6 +47,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,8 +84,7 @@ import javax.swing.plaf.basic.BasicComboBoxUI;
 @SuppressWarnings("serial")
 public class GdxSetupUI extends JFrame {
 
-	//DependencyBank dependencyBank;
-	ProjectBuilder builder;
+	DependencyBank dependencyBank;
 	List<ProjectType> modules = new ArrayList<ProjectType>();
 	List<Dependency> dependencies = new ArrayList<Dependency>();
 
@@ -92,6 +92,12 @@ public class GdxSetupUI extends JFrame {
 	static Point point = new Point();
 
 	public GdxSetupUI () {
+		if(!Releases.isCompatibleSetupTool()) {
+			JOptionPane.showMessageDialog(this, "You're using a deprecated version of the mini2Dx Project Generator.\nPlease download the latest version from mini2Dx.org.");
+			System.exit(0);
+			return;
+		}
+		
 		setTitle("mini2Dx Project Generator");
 		setLayout(new BorderLayout());
 		add(ui, BorderLayout.CENTER);
@@ -115,13 +121,16 @@ public class GdxSetupUI extends JFrame {
 		});
 		setVisible(true);
 
-		builder = new ProjectBuilder(new DependencyBank());
+		dependencyBank = new DependencyBank();
 		modules.add(ProjectType.CORE);
-		dependencies.add(builder.bank.getDependency(ProjectDependency.MINI2DX));
-		dependencies.add(builder.bank.getDependency(ProjectDependency.BOX2D));
+		dependencies.add(dependencyBank.getDependency(ProjectDependency.MINI2DX));
+		dependencies.add(dependencyBank.getDependency(ProjectDependency.BOX2D));
 	}
 
 	void generate () {
+		Release release = Releases.getRelease((String) ui.form.versionButton.getSelectedItem());
+		System.out.println("Using " + release);
+		
 		final String name = ui.form.nameText.getText().trim();
 		if (name.length() == 0) {
 			JOptionPane.showMessageDialog(this, "Please enter a project name.");
@@ -165,7 +174,7 @@ public class GdxSetupUI extends JFrame {
 		}
 
 		if (modules.contains(ProjectType.ANDROID)) {
-			if (!GdxSetup.isSdkUpToDate(sdkLocation)) { 
+			if (!GdxSetup.isSdkUpToDate(sdkLocation, release)) { 
 				try {  //give them a poke in the right direction
 					if (System.getProperty("os.name").contains("Windows")) {
 						String replaced = sdkLocation.replace("\\", "\\\\");
@@ -187,6 +196,7 @@ public class GdxSetupUI extends JFrame {
 			}
 		}
 
+		final ProjectBuilder builder = new ProjectBuilder(dependencyBank, release);
 		List<String> incompatList = builder.buildProject(modules, dependencies);
 		if (incompatList.size() == 0) {
 			try {
@@ -441,7 +451,16 @@ public class GdxSetupUI extends JFrame {
 
 		JPanel subProjectsPanel = new JPanel(new GridLayout());
 		JLabel versionLabel = new JLabel("mini2Dx Version");
-		JComboBox versionButton = new JComboBox(new String[] {"Release " + DependencyBank.mini2DxVersion});
+		
+		JComboBox versionButton;
+		{
+			String [] releaseItems = new String [Releases.getReleases().length];
+			for(int i = 0; i < releaseItems.length; i++) {
+				releaseItems[i] = Releases.getReleases()[i].getMini2DxVersion();
+			}
+			versionButton = new JComboBox(releaseItems);
+		}
+		
 		JLabel projectsLabel = new JLabel("Sub Projects");
 		JLabel extensionsLabel = new JLabel("LibGDX Extensions");
 		List<JPanel> extensionsPanels = new ArrayList<JPanel>();
@@ -580,10 +599,10 @@ public class GdxSetupUI extends JFrame {
 							public void itemStateChanged(ItemEvent e) {
 								SetupCheckBox box = (SetupCheckBox) e.getSource();
 								if (box.isSelected()) {
-									dependencies.add(builder.bank.getDependency(projDep));
+									dependencies.add(dependencyBank.getDependency(projDep));
 								} else {
-									if (dependencies.contains(builder.bank.getDependency(projDep))) {
-										dependencies.remove(builder.bank.getDependency(projDep));
+									if (dependencies.contains(dependencyBank.getDependency(projDep))) {
+										dependencies.remove(dependencyBank.getDependency(projDep));
 									}
 								}
 							}
@@ -763,6 +782,8 @@ public class GdxSetupUI extends JFrame {
 	}
 
 	public static void main (String[] args) throws Exception {
+		Releases.fetchData();
+		
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {

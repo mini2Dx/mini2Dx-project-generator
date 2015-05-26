@@ -44,54 +44,54 @@ public class GdxSetup {
 		}
 	}
 
-	public static boolean isSdkUpToDate (String sdkLocation) {
+	public static boolean isSdkUpToDate (String sdkLocation, Release release) {
 		File buildTools = new File(sdkLocation, "build-tools");
 		if (!buildTools.exists()) {
 			JOptionPane.showMessageDialog(null, "You have no build tools!\nUpdate your Android SDK with build tools version: "
-				+ DependencyBank.buildToolsVersion);
+				+ release.getAndroidBuildToolsVersion());
 			return false;
 		}
 
 		File apis = new File(sdkLocation, "platforms");
 		if (!apis.exists()) {
 			JOptionPane.showMessageDialog(null, "You have no Android APIs!\nUpdate your Android SDK with API level: "
-				+ DependencyBank.androidAPILevel);
+				+ release.getAndroidApiVersion());
 			return false;
 		}
 		String newestLocalTool = getLatestTools(buildTools);
 		int[] localToolVersion = convertTools(newestLocalTool);
-		int[] targetToolVersion = convertTools(DependencyBank.buildToolsVersion);
+		int[] targetToolVersion = convertTools(release.getAndroidBuildToolsVersion());
 		if (compareVersions(targetToolVersion, localToolVersion)) {
 			int value = JOptionPane.showConfirmDialog(null,
 				"You have a more recent version of android build tools than the recommended.\nDo you want to use this version?",
 				"Warning!", JOptionPane.YES_NO_OPTION);
 			if (value != 0) {
-				JOptionPane.showMessageDialog(null, "Using build tools: " + DependencyBank.buildToolsVersion);
+				JOptionPane.showMessageDialog(null, "Using build tools: " + release.getAndroidBuildToolsVersion());
 			} else {
-				DependencyBank.buildToolsVersion = newestLocalTool;
+				release.setAndroidBuildToolsVersion(newestLocalTool);
 			}
 		} else {
 			if (!versionsEqual(localToolVersion, targetToolVersion)) {
 				JOptionPane.showMessageDialog(null, "Please update your Android SDK, you need build tools: "
-					+ DependencyBank.buildToolsVersion);
+					+ release.getAndroidBuildToolsVersion());
 				return false;
 			}
 		}
 
 		int newestLocalApi = getLatestApi(apis);
-		if (newestLocalApi > Integer.valueOf(DependencyBank.androidAPILevel)) {
+		if (newestLocalApi > Integer.valueOf(release.getAndroidApiVersion())) {
 			int value = JOptionPane.showConfirmDialog(null,
 				"You have a more recent Android API than the recommended.\nDo you want to use this version?", "Warning!",
 				JOptionPane.YES_NO_OPTION);
 			if (value != 0) {
-				JOptionPane.showMessageDialog(null, "Using API level: " + DependencyBank.androidAPILevel);
+				JOptionPane.showMessageDialog(null, "Using API level: " + release.getAndroidApiVersion());
 			} else {
-				DependencyBank.androidAPILevel = String.valueOf(newestLocalApi);
+				release.setAndroidApiVersion(String.valueOf(newestLocalApi));
 			}
 		} else {
-			if (newestLocalApi != Integer.valueOf(DependencyBank.androidAPILevel)) {
+			if (newestLocalApi != Integer.valueOf(release.getAndroidApiVersion())) {
 				JOptionPane.showMessageDialog(null, "Please update your Android SDK, you need the Android API: "
-					+ DependencyBank.androidAPILevel);
+					+ release.getAndroidApiVersion());
 				return false;
 			}
 		}
@@ -329,9 +329,9 @@ public class GdxSetup {
 		values.put("%MAIN_CLASS%", mainClass);
 		values.put("%ANDROID_SDK%", sdkPath);
 		values.put("%ASSET_PATH%", assetPath);
-		values.put("%BUILD_TOOLS_VERSION%", DependencyBank.buildToolsVersion);
-		values.put("%API_LEVEL%", DependencyBank.androidAPILevel);
-		values.put("%GWT_VERSION%", DependencyBank.gwtVersion);
+		values.put("%BUILD_TOOLS_VERSION%", builder.release.getAndroidBuildToolsVersion());
+		values.put("%API_LEVEL%", builder.release.getAndroidApiVersion());
+		//values.put("%GWT_VERSION%", DependencyBank.gwtVersion);
 		//		if (builder.modules.contains(ProjectType.HTML)) {
 		//			values.put("%GWT_INHERITS%", parseGwtInherits(builder));
 		//		}
@@ -535,6 +535,14 @@ public class GdxSetup {
 	}
 
 	public static void main (String[] args) throws IOException {
+		Releases.fetchData();
+		
+		if(!Releases.isCompatibleSetupTool()) {
+			System.err.println("You're using a deprecated version of the mini2Dx Project Generator.");
+			System.err.println("Please download the latest version from mini2Dx.org.");
+			return;
+		}
+		
 		Map<String, String> params = parseArgs(args);
 		if (!params.containsKey("dir") ||
 			!params.containsKey("name") ||
@@ -552,7 +560,7 @@ public class GdxSetup {
 			}
 
 			DependencyBank bank = new DependencyBank();
-			ProjectBuilder builder = new ProjectBuilder(bank);
+			ProjectBuilder builder = new ProjectBuilder(bank, Releases.getLatestRelease());
 			List<ProjectType> projects = new ArrayList<ProjectType>();
 			projects.add(ProjectType.CORE);
 			projects.add(ProjectType.DESKTOP);

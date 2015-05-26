@@ -5,14 +5,6 @@ import java.util.HashMap;
 
 public class DependencyBank {
 
-	//Versions
-	static String libGDXVersion = "1.5.4";
-	static String mini2DxVersion = "1.0.0-SNAPSHOT";
-	static String roboVMVersion = "1.0.0";
-	static String buildToolsVersion = "20.0.0";
-	static String androidAPILevel = "20";
-	static String gwtVersion = "2.6.0";
-
 	//Repositories
 	static String mavenLocal = "mavenLocal()";
 	static String mavenCentral = "mavenCentral()";
@@ -25,8 +17,8 @@ public class DependencyBank {
 
 	//Project plugins
 	static String gwtPluginImport = "de.richsource.gradle.plugins:gwt-gradle-plugin:0.6";
-	static String androidPluginImport = "com.android.tools.build:gradle:1.0.0";
-	static String roboVMPluginImport = "org.robovm:robovm-gradle-plugin:" + roboVMVersion;
+	static String androidPluginImport = "com.android.tools.build:gradle:1.2.3";
+	static String roboVMPluginImport = "org.robovm:robovm-gradle-plugin:";
 	
 	//Extension versions
 	static String box2DLightsVersion = "1.3";

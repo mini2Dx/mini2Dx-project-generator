@@ -8,9 +8,6 @@ buildscript {
         jcenter()
     }
     dependencies {
-		classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.6'
-        classpath 'com.android.tools.build:gradle:1.0.0'
-        classpath 'org.robovm:robovm-gradle-plugin:1.0.0'
 		classpath 'com.battlebardgames.parcl:parcl:1.0.5'
     }
 }

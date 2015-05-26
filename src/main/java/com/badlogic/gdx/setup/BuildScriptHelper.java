@@ -11,7 +11,7 @@ public class BuildScriptHelper {
 
 	private static int indent = 0;
 
-	public static void addBuildScript(List<ProjectType> projects, BufferedWriter wr) throws IOException {
+	public static void addBuildScript(List<ProjectType> projects, BufferedWriter wr, Release release) throws IOException {
 		write(wr, "buildscript {");
 		//repos
 		write(wr, "repositories {");
@@ -30,14 +30,14 @@ public class BuildScriptHelper {
 			write(wr, "classpath '" + DependencyBank.androidPluginImport + "'");
 		}
 		if (projects.contains(ProjectType.IOS)) {
-			write(wr, "classpath '" + DependencyBank.roboVMPluginImport + "'");
+			write(wr, "classpath '" + DependencyBank.roboVMPluginImport + release.getRoboVMVersion() + "'");
 		}
 		write(wr, "}");
 		write(wr, "}");
 		space(wr);
 	}
 
-	public static void addAllProjects(BufferedWriter wr) throws IOException {
+	public static void addAllProjects(BufferedWriter wr, Release release) throws IOException {
 		write(wr, "allprojects {");
 		write(wr, "apply plugin: \"eclipse\"");
 		write(wr, "apply plugin: \"idea\"");
@@ -45,9 +45,9 @@ public class BuildScriptHelper {
 		write(wr, "version = '1.0.0'");
 		write(wr, "ext {");
 		write(wr, "appName = '%APP_NAME%'");
-		write(wr, "mini2DxVersion = '" + DependencyBank.mini2DxVersion + "'");
-		write(wr, "gdxVersion = '" + DependencyBank.libGDXVersion + "'");
-		write(wr, "roboVMVersion = '" + DependencyBank.roboVMVersion + "'");
+		write(wr, "mini2DxVersion = '" + release.getMini2DxVersion() + "'");
+		write(wr, "gdxVersion = '" + release.getLibGDXVersion() + "'");
+		write(wr, "roboVMVersion = '" + release.getRoboVMVersion() + "'");
 		write(wr, "box2DLightsVersion = '" + DependencyBank.box2DLightsVersion + "'");
 		write(wr, "ashleyVersion = '" + DependencyBank.ashleyVersion + "'");
 		write(wr, "aiVersion = '" + DependencyBank.aiVersion + "'");
@@ -87,7 +87,7 @@ public class BuildScriptHelper {
 			if (dep.getDependencies(project) == null) continue;
 			for (String moduleDependency : dep.getDependencies(project)) {
 				if (moduleDependency == null) continue;
-				if ((project.equals(ProjectType.ANDROID) || project.equals(ProjectType.IOS)) && moduleDependency.contains("native")) {
+				if ((project.equals(ProjectType.ANDROID)) && moduleDependency.contains("native")) {
 					write(wr, "natives \"" + moduleDependency + "\"");
 				} else {
 					write(wr, "compile \"" + moduleDependency + "\"");
@@ -98,7 +98,7 @@ public class BuildScriptHelper {
 	}
 
 	private static void addConfigurations(ProjectType project, BufferedWriter wr) throws IOException {
-		if (project.equals(ProjectType.IOS) || project.equals(ProjectType.ANDROID)) {
+		if (project.equals(ProjectType.ANDROID)) {
 			write(wr, "configurations { natives }");
 		}
 	}
