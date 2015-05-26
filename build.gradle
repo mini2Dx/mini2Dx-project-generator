@@ -80,7 +80,7 @@ dependencies {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.2'
+    gradleVersion = '2.4'
 }
 
 parcl {
@@ -92,7 +92,7 @@ parcl {
 	app {
 		vmArgs = ["-Xmx512m"]
 		appName = "mini2Dx Project Generator"
-		icon = "mini2Dx.icns"
+		icon = "icon/icon.icns"
 		applicationCategory = "public.app-category.developer-tools"
 		displayName = 'mini2Dx Project Generator'
 		identifier = 'org.mini2Dx.setup'
