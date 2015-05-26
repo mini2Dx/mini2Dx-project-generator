@@ -51,22 +51,9 @@ repositories {
 	maven { url "https://oss.sonatype.org/content/repositories/releases/" }
 }
 
-ext {
-	gdxVersion="1.5.5"
-	roboVMVersion="1.0.0"
-	androidVersion="4.4"
-	beanutilsVersion="1.8.3"
-	langVersion="3.1"
-	reflectionsVersion="0.9.9-RC1"
-	simpleXmlVersion="2.7.1"
-	gsonVersion="2.3"
-	
+ext {	
 	junitVersion="4.8.1"
 	jmockVersion="2.5.1"
-	
-	//org.gradle.daemon="true"
-	//org.gradle.jvmargs="-Xms128m -Xmx256m"
-	//org.gradle.configureondemand="true"
 }
 
 tasks.eclipse.doLast {
