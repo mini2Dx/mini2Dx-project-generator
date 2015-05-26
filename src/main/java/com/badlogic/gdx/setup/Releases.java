@@ -19,8 +19,6 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.Scanner;
 
-import jdk.nashorn.internal.runtime.RewriteException;
-
 /**
  * Retrieves mini2Dx release information from the mini2Dx repository and checks
  * if this tool is compatible with the releases listed.

@@ -1,11 +1,11 @@
 
 package com.badlogic.gdx.setup;
 
-import com.badlogic.gdx.setup.DependencyBank.ProjectType;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import com.badlogic.gdx.setup.DependencyBank.ProjectType;
 
 public class Dependency {
 

@@ -16,11 +16,16 @@
 
 package com.badlogic.gdx.setup;
 
-import static java.awt.GridBagConstraints.*;
-
-import com.badlogic.gdx.setup.DependencyBank.ProjectDependency;
-import com.badlogic.gdx.setup.DependencyBank.ProjectType;
-import com.badlogic.gdx.setup.Executor.CharCallback;
+import static java.awt.GridBagConstraints.BOTH;
+import static java.awt.GridBagConstraints.CENTER;
+import static java.awt.GridBagConstraints.EAST;
+import static java.awt.GridBagConstraints.HORIZONTAL;
+import static java.awt.GridBagConstraints.NONE;
+import static java.awt.GridBagConstraints.NORTH;
+import static java.awt.GridBagConstraints.NORTHEAST;
+import static java.awt.GridBagConstraints.NORTHWEST;
+import static java.awt.GridBagConstraints.VERTICAL;
+import static java.awt.GridBagConstraints.WEST;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -47,7 +52,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,6 +84,10 @@ import javax.swing.event.HyperlinkListener;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.basic.BasicArrowButton;
 import javax.swing.plaf.basic.BasicComboBoxUI;
+
+import com.badlogic.gdx.setup.DependencyBank.ProjectDependency;
+import com.badlogic.gdx.setup.DependencyBank.ProjectType;
+import com.badlogic.gdx.setup.Executor.CharCallback;
 
 @SuppressWarnings("serial")
 public class GdxSetupUI extends JFrame {
