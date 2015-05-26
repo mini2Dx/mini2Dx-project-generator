@@ -31,10 +31,12 @@ public class Releases {
 	private static final String BASE_ROBOVM_VERSION = "1.2.0";
 	private static final String BASE_ANDROID_BUILD_TOOLS_VERSION = "20.0.0";
 	private static final String BASE_ANDROID_API_VERSION = "20";
+	private static final String BASE_PARCL_VERSION = "1.0.5";
 
 	private static final Release BASE_RELEASE = new Release(
 			BASE_MINI2DX_VERSION, BASE_LIBGDX_VERSION, BASE_ROBOVM_VERSION,
-			BASE_ANDROID_BUILD_TOOLS_VERSION, BASE_ANDROID_API_VERSION);
+			BASE_ANDROID_BUILD_TOOLS_VERSION, BASE_ANDROID_API_VERSION,
+			BASE_PARCL_VERSION);
 
 	private static boolean COMPATIBLE_SETUP_TOOL;
 	private static Release[] RELEASES;

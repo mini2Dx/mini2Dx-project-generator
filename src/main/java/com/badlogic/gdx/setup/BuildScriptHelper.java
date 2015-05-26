@@ -1,11 +1,12 @@
 package com.badlogic.gdx.setup;
 
 
-import com.badlogic.gdx.setup.DependencyBank.ProjectType;
-
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
+
+import com.badlogic.gdx.setup.DependencyBank.ProjectType;
 
 public class BuildScriptHelper {
 
@@ -17,12 +18,19 @@ public class BuildScriptHelper {
 		write(wr, "repositories {");
 		write(wr, DependencyBank.mavenCentral);
 		write(wr, "maven { url \"" + DependencyBank.libGDXSnapshotsUrl + "\" }");
+		if(projects.contains(ProjectType.DESKTOP)) {
+			write(wr, "maven { url \"" + DependencyBank.mini2DxThirdPartyUrl + "\" }");
+			write(wr, "maven { url \"" + DependencyBank.mini2DxReleaseUrl + "\" }");
+		}
 		//		if (projects.contains(ProjectType.HTML)) {
 		//			write(wr, DependencyBank.jCenter);
 		//		}
 		write(wr, "}");
 		//dependencies
 		write(wr, "dependencies {");
+		if (projects.contains(ProjectType.DESKTOP)) {
+			write(wr, "classpath '" + DependencyBank.parclPluginImport + release.getParclVersion() + "'");
+		}
 		//		if (projects.contains(ProjectType.HTML)) {
 		//			write(wr, "classpath '" + DependencyBank.gwtPluginImport + "'");
 		//		}
@@ -59,7 +67,6 @@ public class BuildScriptHelper {
 		write(wr, "maven { url \"" + DependencyBank.libGDXSnapshotsUrl + "\" }");
 		write(wr, "maven { url \"" + DependencyBank.libGDXReleaseUrl + "\" }");
 		write(wr, "maven { url \"" + DependencyBank.mini2DxThirdPartyUrl + "\" }");
-		write(wr, "maven { url \"" + DependencyBank.mini2DxSnapshotsUrl + "\" }");
 		write(wr, "maven { url \"" + DependencyBank.mini2DxReleaseUrl + "\" }");
 		write(wr, "}");
 		write(wr, "}");
@@ -75,6 +82,35 @@ public class BuildScriptHelper {
 		addConfigurations(project, wr);
 		space(wr);
 		addDependencies(project, dependencies, wr);
+		if(project.equals(ProjectType.DESKTOP)) {
+			addParclConfig(project, wr);
+		}
+		write(wr, "}");
+	}
+	
+	private static void addParclConfig(ProjectType project, BufferedWriter wr) throws IOException {
+		write(wr, "parcl {");
+		
+		write(wr, "exe {");
+		write(wr, "vmArgs = [\"-Xmx1g\"]");
+		write(wr, "exeName = \"%APP_NAME%\"");
+		write(wr, "}");
+		
+		write(wr, "app {");
+		write(wr, "vmArgs = [\"-Xmx1g\"]");
+		write(wr, "appName = \"%APP_NAME%\"");
+		write(wr, "icon = \"icon.icns\"");
+		write(wr, "applicationCategory = \"public.app-category.adventure-games\"");
+		write(wr, "displayName = \"%APP_NAME%\"");
+		write(wr, "identifier = \"%APP_NAME%\"");
+		write(wr, "copyright = \"Copyright " + Calendar.getInstance().get(Calendar.YEAR) + " Your Company Name\"");
+		write(wr, "}");
+		
+		write(wr, "linux {");
+		write(wr, "vmArgs = [\"-Xmx1g\"]");
+		write(wr, "binName = \"%APP_NAME%\"");
+		write(wr, "}");
+		
 		write(wr, "}");
 	}
 

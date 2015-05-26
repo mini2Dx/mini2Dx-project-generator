@@ -16,6 +16,7 @@ public class Release {
 	private static final String ROBOVM_KEY = "roboVM";
 	private static final String ANDROID_BUILD_TOOLS_KEY = "androidBuildTools";
 	private static final String ANDROID_API_KEY = "androidApi";
+	private static final String PARCL_KEY = "parcl";
 	
 	private Map<String, String> versions;
 	
@@ -31,13 +32,15 @@ public class Release {
 	}
 	
 	public Release(String mini2DxVersion, String libGDXVersion, 
-			String roboVMVersion, String androidBuildToolsVersion, String androidApiVersion) {
+			String roboVMVersion, String androidBuildToolsVersion, 
+			String androidApiVersion, String parclVersion) {
 		versions = new HashMap<String, String>();
 		versions.put(MINI2DX_KEY, mini2DxVersion);
 		versions.put(LIBGDX_KEY, libGDXVersion);
 		versions.put(ROBOVM_KEY, roboVMVersion);
 		versions.put(ANDROID_BUILD_TOOLS_KEY, androidBuildToolsVersion);
 		versions.put(ANDROID_API_KEY, androidApiVersion);
+		versions.put(PARCL_KEY, parclVersion);
 	}
 	
 	public String getMini2DxVersion() {
@@ -66,6 +69,10 @@ public class Release {
 	
 	public void setAndroidApiVersion(String androidApiVersion) {
 		versions.put(ANDROID_API_KEY, androidApiVersion);
+	}
+	
+	public String getParclVersion() {
+		return versions.get(PARCL_KEY);
 	}
 
 	@Override

@@ -16,6 +16,7 @@ public class DependencyBank {
 	static String mini2DxReleaseUrl = "http://maven.mini2dx.org/content/repositories/releases/";
 
 	//Project plugins
+	static String parclPluginImport = "com.battlebardgames.parcl:parcl:";
 	static String gwtPluginImport = "de.richsource.gradle.plugins:gwt-gradle-plugin:0.6";
 	static String androidPluginImport = "com.android.tools.build:gradle:1.2.3";
 	static String roboVMPluginImport = "org.robovm:robovm-gradle-plugin:";
@@ -171,7 +172,7 @@ public class DependencyBank {
 
 	public enum ProjectType {
 		CORE("core", new String[]{"java"}),
-		DESKTOP("desktop", new String[]{"java"}),
+		DESKTOP("desktop", new String[]{"java", "application", "com.battlebardgames.parcl"}),
 		ANDROID("android", new String[]{"android"}),
 		IOS("ios", new String[]{"java", "robovm"});
 
