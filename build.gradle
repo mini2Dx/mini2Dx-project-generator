@@ -8,7 +8,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-		classpath 'com.battlebardgames.parcl:parcl:1.0.5'
+		classpath 'com.battlebardgames.parcl:parcl:1.0.6'
     }
 }
 
