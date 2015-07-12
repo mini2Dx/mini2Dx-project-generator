@@ -19,6 +19,8 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.Scanner;
 
+import com.github.zafarkhaja.semver.Version;
+
 /**
  * Retrieves mini2Dx release information from the mini2Dx repository and checks
  * if this tool is compatible with the releases listed.
@@ -49,17 +51,17 @@ public class Releases {
 			String[] contents = urlScanner.next().split("\n");
 
 			InputStream stream = Releases.class.getClassLoader().getResourceAsStream("VERSION");
-			String setupToolVersion = new Scanner(stream).useDelimiter("\\A")
-					.next();
+			Version setupToolVersion = Version.valueOf(new Scanner(stream)
+					.useDelimiter("\\A")
+					.next());
 			System.out.println("Project Generator Version: " + setupToolVersion);
 			
-			if (setupToolVersion.contains("SNAPSHOT")) {
+			if (setupToolVersion.getPreReleaseVersion().equals("SNAPSHOT")) {
 				COMPATIBLE_SETUP_TOOL = true;
 			} else {
-				String requiredSetupToolVersion = contents[0].substring(
-						contents[0].indexOf(':') + 1).trim();
-				COMPATIBLE_SETUP_TOOL = requiredSetupToolVersion
-						.equals(setupToolVersion);
+				Version requiredSetupToolVersion = Version.valueOf(contents[0].substring(
+						contents[0].indexOf(':') + 1).trim());
+				COMPATIBLE_SETUP_TOOL = setupToolVersion.greaterThanOrEqualTo(requiredSetupToolVersion);
 				System.out.println("Required Project Generator Version: " + requiredSetupToolVersion);
 			}
 
