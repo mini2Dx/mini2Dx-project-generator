@@ -266,7 +266,7 @@ public class GdxSetup {
 
 		// core project
 		project.files.add(new ProjectFile("core/build.gradle"));
-		project.files.add(new ProjectFile("core/src/MainClass", "core/src/" + packageDir + "/" + mainClass + ".java", true));
+		project.files.add(new ProjectFile("core/src/MainClass", "core/src/main/java/" + packageDir + "/" + mainClass + ".java", true));
 		//		if (builder.modules.contains(ProjectType.HTML)) {
 		//			project.files.add(new ProjectFile("core/CoreGdxDefinition", "core/src/" + mainClass + ".gwt.xml", true));
 		//		}
@@ -278,7 +278,7 @@ public class GdxSetup {
 		}
 
 		// Assets
-		String assetPath = builder.modules.contains(ProjectType.ANDROID) ? "android/assets" : "core/assets";
+		String assetPath = "assets";
 		project.files.add(new ProjectFile("android/assets/mini2Dx.png", assetPath + "/mini2Dx.png", false));
 
 		// android project
