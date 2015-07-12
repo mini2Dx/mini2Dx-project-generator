@@ -76,6 +76,8 @@ parcl {
 	exe {
 		vmArgs = ["-Xmx512m"]
 		exeName = "mini2Dx-project-generator"
+		
+		withJre("${org.gradle.internal.jvm.Jvm.current().javaHome}")
 	}
 
 	app {
@@ -86,10 +88,14 @@ parcl {
 		displayName = 'mini2Dx Project Generator'
 		identifier = 'org.mini2Dx.setup'
 		copyright = 'Copyright 2015 mini2Dx'
+		
+		withJre("${org.gradle.internal.jvm.Jvm.current().javaHome}")
 	}
 
 	linux {
 		vmArgs = ["-Xmx512m"]
 		binName = "mini2Dx-project-generator"
+		
+		withJre("${org.gradle.internal.jvm.Jvm.current().javaHome}")
 	}
 }
