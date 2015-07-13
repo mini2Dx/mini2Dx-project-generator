@@ -11,7 +11,7 @@ import java.util.List;
 import com.badlogic.gdx.setup.DependencyBank.ProjectType;
 
 public class ProjectBuilder {
-
+	String projectName;
 	DependencyBank bank;
 	List<ProjectType> modules = new ArrayList<ProjectType>();
 	List<Dependency> dependencies = new ArrayList<Dependency>();
@@ -19,7 +19,8 @@ public class ProjectBuilder {
 	File buildFile;
 	Release release;
 
-	public ProjectBuilder(DependencyBank bank, Release release) {
+	public ProjectBuilder(String projectName, DependencyBank bank, Release release) {
+		this.projectName = projectName;
 		this.bank = bank;
 		this.release = release;
 	}
@@ -59,6 +60,8 @@ public class ProjectBuilder {
 				}
 			}
 			settingsBw.write(settingsContents);
+			settingsBw.write("\n");
+			settingsBw.write("rootProject.name = '" + projectName + "'");
 			settingsBw.close();
 			settingsWriter.close();
 

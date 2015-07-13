@@ -571,7 +571,7 @@ public class GdxSetup {
 			}
 
 			DependencyBank bank = new DependencyBank();
-			ProjectBuilder builder = new ProjectBuilder(bank, Releases.getLatestRelease());
+			ProjectBuilder builder = new ProjectBuilder(params.get("name"), bank, Releases.getLatestRelease());
 			List<ProjectType> projects = new ArrayList<ProjectType>();
 			projects.add(ProjectType.CORE);
 			projects.add(ProjectType.DESKTOP);

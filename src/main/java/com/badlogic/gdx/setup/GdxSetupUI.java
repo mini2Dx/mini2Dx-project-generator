@@ -204,7 +204,7 @@ public class GdxSetupUI extends JFrame {
 			}
 		}
 
-		final ProjectBuilder builder = new ProjectBuilder(dependencyBank, release);
+		final ProjectBuilder builder = new ProjectBuilder(name, dependencyBank, release);
 		List<String> incompatList = builder.buildProject(modules, dependencies);
 		if (incompatList.size() == 0) {
 			try {
