@@ -132,7 +132,7 @@ public class GdxSetupUI extends JFrame {
 		dependencyBank = new DependencyBank();
 		modules.add(ProjectType.CORE);
 		dependencies.add(dependencyBank.getDependency(ProjectDependency.MINI2DX));
-		dependencies.add(dependencyBank.getDependency(ProjectDependency.BOX2D));
+		dependencies.add(dependencyBank.getDependency(ProjectDependency.TILED));
 	}
 
 	void generate () {
@@ -470,7 +470,7 @@ public class GdxSetupUI extends JFrame {
 		}
 		
 		JLabel projectsLabel = new JLabel("Sub Projects");
-		JLabel extensionsLabel = new JLabel("LibGDX Extensions");
+		JLabel extensionsLabel = new JLabel("mini2Dx / LibGDX Extensions");
 		List<JPanel> extensionsPanels = new ArrayList<JPanel>();
 		SetupButton showMoreExtensionsButton = new SetupButton("Show Third Party Extensions");
 
@@ -598,7 +598,7 @@ public class GdxSetupUI extends JFrame {
 						}
 						SetupCheckBox depCheckBox = new SetupCheckBox(projDep.name().substring(0, 1) + projDep.name().substring(1, projDep.name().length()).toLowerCase());
 						depCheckBox.setToolTipText(projDep.getDescription());
-						if (projDep.equals(ProjectDependency.BOX2D)) {
+						if (projDep.equals(ProjectDependency.TILED)) { 
 							depCheckBox.setSelected(true);
 						}
 						extensionPanel.add(depCheckBox);

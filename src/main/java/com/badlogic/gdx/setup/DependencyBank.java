@@ -65,6 +65,16 @@ public class DependencyBank {
 			
 			"Core Library for mini2Dx"
 		),
+		TILED(
+				new String[]{"org.mini2Dx:mini2Dx-tiled:$mini2DxVersion"},
+				new String[]{},
+				new String[]{},
+				new String[]{},
+				new String[]{},
+				new String[]{},
+				
+				"Tiled support for mini2Dx"
+		),
 		BULLET(
 			new String[]{"com.badlogicgames.gdx:gdx-bullet:$gdxVersion"},
 			new String[]{"com.badlogicgames.gdx:gdx-bullet-platform:$gdxVersion:natives-desktop"},
