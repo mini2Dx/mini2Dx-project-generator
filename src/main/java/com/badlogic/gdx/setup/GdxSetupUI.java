@@ -96,7 +96,7 @@ public class GdxSetupUI extends JFrame {
 	List<ProjectType> modules = new ArrayList<ProjectType>();
 	List<Dependency> dependencies = new ArrayList<Dependency>();
 
-	UI ui = new UI();
+	UI ui;
 	static Point point = new Point();
 
 	public GdxSetupUI () {
@@ -108,7 +108,15 @@ public class GdxSetupUI extends JFrame {
 		
 		setTitle("mini2Dx Project Generator");
 		setLayout(new BorderLayout());
+		
+		dependencyBank = new DependencyBank();
+		modules.add(ProjectType.CORE);
+		dependencies.add(dependencyBank.getDependency(ProjectDependency.MINI2DX));
+		dependencies.add(dependencyBank.getDependency(ProjectDependency.TILED));
+		
+		ui = new UI();
 		add(ui, BorderLayout.CENTER);
+		
 		setSize(620, 720);
 		setLocationRelativeTo(null);
 		setUndecorated(true);		
@@ -128,11 +136,6 @@ public class GdxSetupUI extends JFrame {
 			}
 		});
 		setVisible(true);
-
-		dependencyBank = new DependencyBank();
-		modules.add(ProjectType.CORE);
-		dependencies.add(dependencyBank.getDependency(ProjectDependency.MINI2DX));
-		dependencies.add(dependencyBank.getDependency(ProjectDependency.TILED));
 	}
 
 	void generate () {
