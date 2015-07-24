@@ -2,6 +2,7 @@
 - Updated to latest extensions.xml from LibGDX
 - Fixed generated projects missing mini2Dx-tiled dependency
 - Fixed core project being last project declared
+- Fixed duplicate box2D and bullet-platform dependencies in desktop project
 
 [1.0.1]
 - Assets directory moved from android to core folder
