@@ -6,3 +6,7 @@
 An app for creating new mini2Dx projects.
 
 Forked from the LibGDX project setup app and customised for mini2Dx.
+
+## Feature requests, bugs, issues, etc.
+
+Please submit feature requests, bug reports and issues to the [mini2Dx Issue Tracker](https://github.com/mini2Dx/mini2Dx/issues).
