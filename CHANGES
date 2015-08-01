@@ -1,3 +1,5 @@
+[1.0.3]
+
 [1.0.2]
 - Updated to latest extensions.xml from LibGDX
 - Fixed generated projects missing mini2Dx-tiled dependency
