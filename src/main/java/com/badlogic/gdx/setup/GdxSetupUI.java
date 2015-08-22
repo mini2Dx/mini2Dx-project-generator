@@ -113,6 +113,7 @@ public class GdxSetupUI extends JFrame {
 		modules.add(ProjectType.CORE);
 		dependencies.add(dependencyBank.getDependency(ProjectDependency.MINI2DX));
 		dependencies.add(dependencyBank.getDependency(ProjectDependency.TILED));
+		dependencies.add(dependencyBank.getDependency(ProjectDependency.ARTEMIS));
 		
 		ui = new UI();
 		add(ui, BorderLayout.CENTER);
@@ -602,6 +603,8 @@ public class GdxSetupUI extends JFrame {
 						SetupCheckBox depCheckBox = new SetupCheckBox(projDep.name().substring(0, 1) + projDep.name().substring(1, projDep.name().length()).toLowerCase());
 						depCheckBox.setToolTipText(projDep.getDescription());
 						if (projDep.equals(ProjectDependency.TILED)) { 
+							depCheckBox.setSelected(true);
+						} else if(projDep.equals(ProjectDependency.ARTEMIS)) {
 							depCheckBox.setSelected(true);
 						}
 						extensionPanel.add(depCheckBox);

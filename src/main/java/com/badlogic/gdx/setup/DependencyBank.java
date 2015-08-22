@@ -75,6 +75,16 @@ public class DependencyBank {
 				
 				"Tiled support for mini2Dx"
 		),
+		ARTEMIS (
+				new String[]{"org.mini2Dx:mini2Dx-artemis-odb:$mini2DxVersion"},
+				new String[]{},
+				new String[]{},
+				new String[]{},
+				new String[]{},
+				new String[]{},
+				
+				"Artemis ODB support for mini2Dx"
+		),
 		BULLET(
 			new String[]{"com.badlogicgames.gdx:gdx-bullet:$gdxVersion"},
 			new String[]{"com.badlogicgames.gdx:gdx-bullet-platform:$gdxVersion:natives-desktop"},
@@ -114,16 +124,6 @@ public class DependencyBank {
 			new String[]{"Box2DLights"},
 			
 			"2D Lighting framework that utilises Box2D"
-		),
-		ASHLEY(
-			new String[]{"com.badlogicgames.ashley:ashley:$ashleyVersion"},
-			new String[]{},
-			new String[]{"com.badlogicgames.ashley:ashley:$ashleyVersion"},
-			new String[]{},
-			new String[]{"com.badlogicgames.ashley:ashley:$ashleyVersion:sources"},
-			new String[]{"com.badlogic.ashley_gwt"},
-			
-			"Lightweight Entity framework"
 		),
 		AI(
 			new String[]{"com.badlogicgames.gdx:gdx-ai:$aiVersion"},
