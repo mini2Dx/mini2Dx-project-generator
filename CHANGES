@@ -1,4 +1,7 @@
-[1.0.3]
+[1.1.0]
+- Updated templates to match mini2Dx 1.2.0
+- Replaced Ashley with mini2Dx's Artemis ODB integration option
+- Added support for detecting deprecated releases
 
 [1.0.2]
 - Updated to latest extensions.xml from LibGDX
