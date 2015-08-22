@@ -68,7 +68,7 @@ public class Releases {
 			}
 			
 			List<Release> activeReleases = new ArrayList<Release>();
-			for (int i = 0; i < contents.length; i++) {
+			for (int i = 0; i < contents.length - 1; i++) {
 				Release release = new Release(contents[i + 1]);
 				if(release.isDeprecated()) {
 					System.out.println("Ignoring deprecated release: " + release);
