@@ -17,8 +17,10 @@ public class Release {
 	private static final String ANDROID_BUILD_TOOLS_KEY = "androidBuildTools";
 	private static final String ANDROID_API_KEY = "androidApi";
 	private static final String PARCL_KEY = "parcl";
+	private static final String DEPRECATED_KEY = "deprecated";
 	
 	private Map<String, String> versions;
+	private boolean deprecated = false;
 	
 	public Release(String releaseData) {
 		versions = new HashMap<String, String>();
@@ -27,7 +29,11 @@ public class Release {
 			String [] mapping = property.split(":");
 			String key = mapping[0].trim();
 			String value = mapping[1].trim();
-			versions.put(key, value);
+			if(key.equals(DEPRECATED_KEY)) {
+				deprecated = Boolean.parseBoolean(value);
+			} else {
+				versions.put(key, value);
+			}
 		}
 	}
 	
@@ -75,12 +81,17 @@ public class Release {
 		return versions.get(PARCL_KEY);
 	}
 
+	public boolean isDeprecated() {
+		return deprecated;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder("Release ");
 		for(String key : versions.keySet()) {
 			builder.append("[" + key + ": " + versions.get(key) + "]");
 		}
+		builder.append("[deprecated: " + deprecated + "]");
 		return builder.toString();
 	}
 }

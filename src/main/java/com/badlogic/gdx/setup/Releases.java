@@ -17,6 +17,8 @@ package com.badlogic.gdx.setup;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import com.github.zafarkhaja.semver.Version;
@@ -26,9 +28,9 @@ import com.github.zafarkhaja.semver.Version;
  * if this tool is compatible with the releases listed.
  */
 public class Releases {
-	private static final String BASE_MINI2DX_VERSION = "1.0.0";
-	private static final String BASE_LIBGDX_VERSION = "1.6.1";
-	private static final String BASE_ROBOVM_VERSION = "1.2.0";
+	private static final String BASE_MINI2DX_VERSION = "1.2.0";
+	private static final String BASE_LIBGDX_VERSION = "1.6.5";
+	private static final String BASE_ROBOVM_VERSION = "1.6.0";
 	private static final String BASE_ANDROID_BUILD_TOOLS_VERSION = "20.0.0";
 	private static final String BASE_ANDROID_API_VERSION = "20";
 	private static final String BASE_PARCL_VERSION = "1.0.6";
@@ -39,7 +41,7 @@ public class Releases {
 			BASE_PARCL_VERSION);
 
 	private static boolean COMPATIBLE_SETUP_TOOL;
-	private static Release[] RELEASES;
+	private static Release[] RELEASES = new Release[1];
 
 	public static void fetchData() {
 		Scanner urlScanner = null;
@@ -64,13 +66,18 @@ public class Releases {
 				COMPATIBLE_SETUP_TOOL = setupToolVersion.greaterThanOrEqualTo(requiredSetupToolVersion);
 				System.out.println("Required Project Generator Version: " + requiredSetupToolVersion);
 			}
-
-			RELEASES = new Release[contents.length - 1];
-			for (int i = 0; i < RELEASES.length; i++) {
+			
+			List<Release> activeReleases = new ArrayList<Release>();
+			for (int i = 0; i < contents.length; i++) {
 				Release release = new Release(contents[i + 1]);
+				if(release.isDeprecated()) {
+					System.out.println("Ignoring deprecated release: " + release);
+					continue;
+				}
 				System.out.println("Found " + release);
-				RELEASES[i] = release;
+				activeReleases.add(release);
 			}
+			RELEASES = activeReleases.toArray(RELEASES);
 		} catch (Exception e) {
 			e.printStackTrace();
 
