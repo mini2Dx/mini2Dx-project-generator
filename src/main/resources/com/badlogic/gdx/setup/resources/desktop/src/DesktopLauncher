@@ -1,17 +1,15 @@
 package %PACKAGE%.desktop;
 
-import org.mini2Dx.desktop.DesktopMini2DxGame;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import org.mini2Dx.desktop.DesktopMini2DxConfig;
+
+import com.badlogic.gdx.backends.lwjgl.DesktopMini2DxGame;
+
 import %PACKAGE%.%MAIN_CLASS%;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
-		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.stencil = 8;
+		DesktopMini2DxConfig config = new DesktopMini2DxConfig(%MAIN_CLASS%.GAME_IDENTIFIER);
 		config.vSyncEnabled = true;
-        config.foregroundFPS = 0;
-        config.backgroundFPS = 0;
-		new LwjglApplication(new DesktopMini2DxGame(%MAIN_CLASS%.GAME_IDENTIFIER, new %MAIN_CLASS%()), config);
+		new DesktopMini2DxGame(new %MAIN_CLASS%(), config);
 	}
 }

@@ -1,18 +1,17 @@
 package %PACKAGE%;
 
+import org.mini2Dx.ios.IOSMini2DxConfig;
 import org.robovm.apple.foundation.NSAutoreleasePool;
 import org.robovm.apple.uikit.UIApplication;
 
-import org.mini2Dx.ios.IOSMini2DxGame;
-import com.badlogic.gdx.backends.iosrobovm.IOSApplication;
-import com.badlogic.gdx.backends.iosrobovm.IOSApplicationConfiguration;
+import com.badlogic.gdx.backends.iosrobovm.IOSMini2DxGame;
 import %PACKAGE%.%MAIN_CLASS%;
 
-public class IOSLauncher extends IOSApplication.Delegate {
+public class IOSLauncher extends IOSMini2DxGame.Delegate {
     @Override
-    protected IOSApplication createApplication() {
-        IOSApplicationConfiguration config = new IOSApplicationConfiguration();
-        return new IOSApplication(new IOSMini2DxGame(%MAIN_CLASS%.GAME_IDENTIFIER, new %MAIN_CLASS%()), config);
+    protected IOSMini2DxGame createApplication() {
+        IOSMini2DxConfig config = new IOSMini2DxConfig(%MAIN_CLASS%.GAME_IDENTIFIER);
+        return new IOSMini2DxGame(new %MAIN_CLASS%(), config);
     }
 
     public static void main(String[] argv) {
