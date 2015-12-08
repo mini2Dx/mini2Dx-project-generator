@@ -11,9 +11,9 @@ public class DependencyBank {
 	static String jCenter = "jcenter()";
 	static String libGDXSnapshotsUrl = "https://oss.sonatype.org/content/repositories/snapshots/";
 	static String libGDXReleaseUrl = "https://oss.sonatype.org/content/repositories/releases/";
-	static String mini2DxThirdPartyUrl = "http://maven.mini2dx.org/content/repositories/thirdparty/";
-	static String mini2DxSnapshotsUrl = "http://maven.mini2dx.org/content/repositories/snapshots/";
-	static String mini2DxReleaseUrl = "http://maven.mini2dx.org/content/repositories/releases/";
+	static String mini2DxThirdPartyUrl = "https://mini2dx.org/maven/content/repositories/thirdparty/";
+	static String mini2DxSnapshotsUrl = "https://mini2dx.org/maven/content/repositories/snapshots/";
+	static String mini2DxReleaseUrl = "https://mini2dx.org/maven/content/repositories/releases/";
 
 	//Project plugins
 	static String parclPluginImport = "com.battlebardgames.parcl:parcl:";
