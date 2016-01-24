@@ -17,7 +17,7 @@ apply plugin: "idea"
 apply plugin: "maven"
 apply plugin: "java"
 apply plugin: "application"
-apply plugin: "com.battlebardgames.parcl"
+apply plugin: "org.mini2Dx.parcl"
     
 group = 'org.mini2Dx'
 version = '1.2.0-SNAPSHOT'
