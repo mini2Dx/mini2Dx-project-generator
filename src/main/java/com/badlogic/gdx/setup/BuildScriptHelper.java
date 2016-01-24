@@ -56,6 +56,7 @@ public class BuildScriptHelper {
 		write(wr, "mini2DxVersion = '" + release.getMini2DxVersion() + "'");
 		write(wr, "gdxVersion = '" + release.getLibGDXVersion() + "'");
 		write(wr, "roboVMVersion = '" + release.getRoboVMVersion() + "'");
+		write(wr, "minibusVersion = '" + DependencyBank.minibusVersion + "'");
 		write(wr, "box2DLightsVersion = '" + DependencyBank.box2DLightsVersion + "'");
 		write(wr, "ashleyVersion = '" + DependencyBank.ashleyVersion + "'");
 		write(wr, "aiVersion = '" + DependencyBank.aiVersion + "'");

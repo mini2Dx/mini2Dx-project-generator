@@ -22,9 +22,10 @@ public class DependencyBank {
 	static String roboVMPluginImport = "org.robovm:robovm-gradle-plugin:";
 	
 	//Extension versions
-	static String box2DLightsVersion = "1.3";
-	static String ashleyVersion = "1.4.0";
-	static String aiVersion = "1.5.0";
+	static String minibusVersion = "1.0.0-alpha2";
+	static String box2DLightsVersion = "1.4";
+	static String ashleyVersion = "1.7.0";
+	static String aiVersion = "1.7.0";
 
 	HashMap<ProjectDependency, Dependency> gdxDependencies = new HashMap<ProjectDependency, Dependency>();
 
@@ -84,6 +85,26 @@ public class DependencyBank {
 				new String[]{},
 				
 				"Artemis ODB support for mini2Dx"
+		),
+		UI (
+				new String[]{"org.mini2Dx:mini2Dx-ui:$mini2DxVersion"},
+				new String[]{},
+				new String[]{},
+				new String[]{},
+				new String[]{},
+				new String[]{},
+				
+				"UI framework for mini2Dx"
+		),
+		MINIBUS (
+				new String[]{"org.mini2Dx:mini2Dx-core:$minibusVersion"},
+				new String[]{},
+				new String[]{},
+				new String[]{},
+				new String[]{},
+				new String[]{},
+				
+				"Message Bus library"
 		),
 		BULLET(
 			new String[]{"com.badlogicgames.gdx:gdx-bullet:$gdxVersion"},

@@ -114,6 +114,8 @@ public class GdxSetupUI extends JFrame {
 		dependencies.add(dependencyBank.getDependency(ProjectDependency.MINI2DX));
 		dependencies.add(dependencyBank.getDependency(ProjectDependency.TILED));
 		dependencies.add(dependencyBank.getDependency(ProjectDependency.ARTEMIS));
+		dependencies.add(dependencyBank.getDependency(ProjectDependency.UI));
+		dependencies.add(dependencyBank.getDependency(ProjectDependency.MINIBUS));
 		
 		ui = new UI();
 		add(ui, BorderLayout.CENTER);
@@ -591,8 +593,8 @@ public class GdxSetupUI extends JFrame {
 
 			int depCounter = 0;
 
-			for (int row = 0; row <= (ProjectDependency.values().length / 5); row++) {
-				JPanel extensionPanel = new JPanel(new GridLayout(1, 5));
+			for (int row = 0; row <= (ProjectDependency.values().length / 4); row++) {
+				JPanel extensionPanel = new JPanel(new GridLayout(1, 4));
 				while (depCounter < ProjectDependency.values().length) {
 					if (ProjectDependency.values()[depCounter] != null) {
 						final ProjectDependency projDep = ProjectDependency.values()[depCounter];
@@ -605,6 +607,10 @@ public class GdxSetupUI extends JFrame {
 						if (projDep.equals(ProjectDependency.TILED)) { 
 							depCheckBox.setSelected(true);
 						} else if(projDep.equals(ProjectDependency.ARTEMIS)) {
+							depCheckBox.setSelected(true);
+						} else if(projDep.equals(ProjectDependency.UI)) {
+							depCheckBox.setSelected(true);
+						} else if(projDep.equals(ProjectDependency.MINIBUS)) {
 							depCheckBox.setSelected(true);
 						}
 						extensionPanel.add(depCheckBox);
@@ -621,7 +627,7 @@ public class GdxSetupUI extends JFrame {
 								}
 							}
 						});
-						if (depCounter % 5 == 0) {
+						if (depCounter % 4 == 0) {
 							depCounter++;
 							break;
 						}
@@ -629,7 +635,7 @@ public class GdxSetupUI extends JFrame {
 					}
 				}
 				
-				for (int left = ((depCounter - 1) % 5); left > 1; left--) {
+				for (int left = ((depCounter - 1) % 4); left > 1; left--) {
 					extensionPanel.add(Box.createHorizontalBox());
 				}
 
