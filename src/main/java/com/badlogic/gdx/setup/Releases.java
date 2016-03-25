@@ -29,8 +29,8 @@ import com.github.zafarkhaja.semver.Version;
  */
 public class Releases {
 	private static final String BASE_MINI2DX_VERSION = "1.3.0";
-	private static final String BASE_LIBGDX_VERSION = "1.7.1";
-	private static final String BASE_ROBOVM_VERSION = "1.9.0";
+	private static final String BASE_LIBGDX_VERSION = "1.9.2";
+	private static final String BASE_ROBOVM_VERSION = "1.12.0";
 	private static final String BASE_ANDROID_BUILD_TOOLS_VERSION = "23.0.1";
 	private static final String BASE_ANDROID_API_VERSION = "20";
 	private static final String BASE_PARCL_VERSION = "1.0.7";

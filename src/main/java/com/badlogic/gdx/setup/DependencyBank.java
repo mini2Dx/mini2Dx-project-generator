@@ -18,14 +18,14 @@ public class DependencyBank {
 	//Project plugins
 	static String parclPluginImport = "org.mini2Dx:parcl:";
 	static String gwtPluginImport = "de.richsource.gradle.plugins:gwt-gradle-plugin:0.6";
-	static String androidPluginImport = "com.android.tools.build:gradle:1.2.3";
+	static String androidPluginImport = "com.android.tools.build:gradle:1.5.0";
 	static String roboVMPluginImport = "org.robovm:robovm-gradle-plugin:";
 	
 	//Extension versions
 	static String minibusVersion = "1.0.0-alpha2";
 	static String box2DLightsVersion = "1.4";
 	static String ashleyVersion = "1.7.0";
-	static String aiVersion = "1.7.0";
+	static String aiVersion = "1.9.0";
 
 	HashMap<ProjectDependency, Dependency> gdxDependencies = new HashMap<ProjectDependency, Dependency>();
 
