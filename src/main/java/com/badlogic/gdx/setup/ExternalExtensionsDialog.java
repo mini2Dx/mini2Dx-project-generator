@@ -105,7 +105,7 @@ public class ExternalExtensionsDialog extends JDialog implements TableModelListe
 		});
 
 		setTitle("Third party external extensions");
-		setSize(600, 300);
+		setSize(680, 300);
 		setLocationRelativeTo(null);
 	}
 
@@ -118,8 +118,8 @@ public class ExternalExtensionsDialog extends JDialog implements TableModelListe
 
 		topPanel = new JPanel(new GridBagLayout());
 		topPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-		warningNotice = new JLabel("List of third party extensions for LibGDX");
-		warningNotice2 = new JLabel("These are not maintained by the LibGDX team, please see the support links for info and help");
+		warningNotice = new JLabel("List of third party extensions for mini2Dx / LibGDX");
+		warningNotice2 = new JLabel("These are not maintained by the mini2Dx or LibGDX team, please see the support links for info and help");
 		warningNotice.setHorizontalAlignment(JLabel.CENTER);
 		warningNotice2.setHorizontalAlignment(JLabel.CENTER);
 
@@ -127,8 +127,8 @@ public class ExternalExtensionsDialog extends JDialog implements TableModelListe
 		topPanel.add(warningNotice2, new GridBagConstraints(0, 1, 1, 1, 1, 0, NORTH, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
 
 		JSeparator separator = new JSeparator();
-		separator.setForeground(new Color(85, 85, 85));
-		separator.setBackground(new Color(85, 85, 85));
+		separator.setForeground(new Color(239, 239, 239));
+		separator.setBackground(new Color(239, 239, 239));
 
 		topPanel.add(separator, new GridBagConstraints(0, 2, 1, 1, 1, 1, NORTH, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
 
@@ -243,20 +243,20 @@ public class ExternalExtensionsDialog extends JDialog implements TableModelListe
 	}
 
 	private void uiStyle () {
-		contentPane.setBackground(new Color(36, 36, 36));
+		contentPane.setBackground(new Color(239, 239, 239));
 
-		topPanel.setBackground(new Color(36, 36, 36));
-		topPanel.setForeground(new Color(255, 255, 255));
-		table.setBackground(new Color(46, 46, 46));
-		table.setForeground(new Color(255, 255, 255));
-		bottomPanel.setBackground(new Color(36, 36, 36));
-		bottomPanel.setForeground(new Color(255, 255, 255));
-		buttonPanel.setBackground(new Color(36, 36, 36));
-		buttonPanel.setForeground(new Color(255, 255, 255));
+		topPanel.setBackground(new Color(239, 239, 239));
+		topPanel.setForeground(new Color(46, 46, 46));
+		table.setBackground(new Color(239, 239, 239));
+		table.setForeground(new Color(46, 46, 46));
+		bottomPanel.setBackground(new Color(239, 239, 239));
+		bottomPanel.setForeground(new Color(46, 46, 46));
+		buttonPanel.setBackground(new Color(239, 239, 239));
+		buttonPanel.setForeground(new Color(46, 46, 46));
 
 		scrollPane.setBorder(BorderFactory.createEmptyBorder());
-		scrollPane.setBackground(new Color(36, 36, 36));
-		scrollPane.getViewport().setBackground(new Color(36, 36, 36));
+		scrollPane.setBackground(new Color(239, 239, 239));
+		scrollPane.getViewport().setBackground(new Color(239, 239, 239));
 
 		warningNotice.setForeground(new Color(255, 20, 20));
 		warningNotice2.setForeground(new Color(255, 20, 20));

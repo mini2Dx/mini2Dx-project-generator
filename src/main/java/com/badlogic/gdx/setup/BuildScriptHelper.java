@@ -16,7 +16,9 @@ public class BuildScriptHelper {
 		write(wr, "buildscript {");
 		//repos
 		write(wr, "repositories {");
+		write(wr, DependencyBank.mavenLocal);
 		write(wr, DependencyBank.mavenCentral);
+		write(wr, DependencyBank.jCenter);
 		write(wr, "maven { url \"" + DependencyBank.libGDXSnapshotsUrl + "\" }");
 		if(projects.contains(ProjectType.DESKTOP)) {
 			write(wr, "maven { url \"" + DependencyBank.mini2DxThirdPartyUrl + "\" }");
@@ -30,6 +32,7 @@ public class BuildScriptHelper {
 		write(wr, "dependencies {");
 		if (projects.contains(ProjectType.DESKTOP)) {
 			write(wr, "classpath '" + DependencyBank.parclPluginImport + release.getParclVersion() + "'");
+			write(wr, "classpath '" + DependencyBank.gradleButlerPluginImport + release.getGradleButlerPluginVersion() + "'");
 		}
 		//		if (projects.contains(ProjectType.HTML)) {
 		//			write(wr, "classpath '" + DependencyBank.gwtPluginImport + "'");
@@ -56,10 +59,12 @@ public class BuildScriptHelper {
 		write(wr, "mini2DxVersion = '" + release.getMini2DxVersion() + "'");
 		write(wr, "gdxVersion = '" + release.getLibGDXVersion() + "'");
 		write(wr, "roboVMVersion = '" + release.getRoboVMVersion() + "'");
-		write(wr, "minibusVersion = '" + DependencyBank.minibusVersion + "'");
+		write(wr, "minibusVersion = '" + release.getMinibusVersion() + "'");
+		write(wr, "miniscriptVersion = '" + release.getMiniscriptVersion() + "'");
 		write(wr, "box2DLightsVersion = '" + DependencyBank.box2DLightsVersion + "'");
 		write(wr, "ashleyVersion = '" + DependencyBank.ashleyVersion + "'");
 		write(wr, "aiVersion = '" + DependencyBank.aiVersion + "'");
+		write(wr, "androidBsfVersion = '3.1.3'");
 		write(wr, "}");
 		space(wr);
 		write(wr, "repositories {");
@@ -85,6 +90,7 @@ public class BuildScriptHelper {
 		addDependencies(project, dependencies, wr);
 		if(project.equals(ProjectType.DESKTOP)) {
 			addParclConfig(project, wr);
+			addButlerConfig(project, wr);
 		}
 		write(wr, "}");
 	}
@@ -110,6 +116,27 @@ public class BuildScriptHelper {
 		write(wr, "linux {");
 		write(wr, "vmArgs = [\"-Xmx1g\"]");
 		write(wr, "binName = \"%APP_NAME%\"");
+		write(wr, "}");
+		
+		write(wr, "}");
+	}
+	
+	private static void addButlerConfig(ProjectType project, BufferedWriter wr) throws IOException {
+		write(wr, "butler {");
+		
+		write(wr, "user = \"your-itchio-user\"");
+		write(wr, "game = \"%APP_NAME%\"");
+		
+		write(wr, "windows {");
+		write(wr, "binDirectory = \"$buildDir/windows\"");
+		write(wr, "}");
+		
+		write(wr, "osx {");
+		write(wr, "binDirectory = \"$buildDir/mac\"");
+		write(wr, "}");
+		
+		write(wr, "linux {");
+		write(wr, "binDirectory = \"$buildDir/linux\"");
 		write(wr, "}");
 		
 		write(wr, "}");

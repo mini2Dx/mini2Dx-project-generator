@@ -17,12 +17,12 @@ public class DependencyBank {
 
 	//Project plugins
 	static String parclPluginImport = "org.mini2Dx:parcl:";
+	static String gradleButlerPluginImport = "org.mini2Dx:butler:";
 	static String gwtPluginImport = "de.richsource.gradle.plugins:gwt-gradle-plugin:0.6";
 	static String androidPluginImport = "com.android.tools.build:gradle:1.5.0";
 	static String roboVMPluginImport = "org.robovm:robovm-gradle-plugin:";
 	
 	//Extension versions
-	static String minibusVersion = "1.0.0-alpha2";
 	static String box2DLightsVersion = "1.4";
 	static String ashleyVersion = "1.7.0";
 	static String aiVersion = "1.9.0";
@@ -96,7 +96,7 @@ public class DependencyBank {
 				
 				"UI framework for mini2Dx"
 		),
-		MINIBUS (
+		MESSAGE_BUS (
 				new String[]{"org.mini2Dx:mini2Dx-core:$minibusVersion"},
 				new String[]{},
 				new String[]{},
@@ -104,7 +104,47 @@ public class DependencyBank {
 				new String[]{},
 				new String[]{},
 				
-				"Message Bus library"
+				"Message Bus via minibus"
+		),
+		LUA_SCRIPTING (
+				new String[]{"org.mini2Dx:miniscript-lua:$miniscriptVersion"},
+				new String[]{},
+				new String[]{"com.wu-man:android-bsf-api:$androidBsfVersion"},
+				new String[]{},
+				new String[]{},
+				new String[]{},
+				
+				"Lua scripting via miniscript"
+		),
+		GROOVY_SCRIPTING (
+				new String[]{"org.mini2Dx:miniscript-groovy:$miniscriptVersion"},
+				new String[]{},
+				new String[]{"com.wu-man:android-bsf-api:$androidBsfVersion"},
+				new String[]{},
+				new String[]{},
+				new String[]{},
+				
+				"Groovy scripting via miniscript"
+		),
+		PYTHON_SCRIPTING (
+				new String[]{"org.mini2Dx:miniscript-python:$miniscriptVersion"},
+				new String[]{},
+				new String[]{"com.wu-man:android-bsf-api:$androidBsfVersion"},
+				new String[]{},
+				new String[]{},
+				new String[]{},
+				
+				"Python scripting via miniscript"
+		),
+		RUBY_SCRIPTING (
+				new String[]{"org.mini2Dx:miniscript-ruby:$miniscriptVersion"},
+				new String[]{},
+				new String[]{"com.wu-man:android-bsf-api:$androidBsfVersion"},
+				new String[]{},
+				new String[]{},
+				new String[]{},
+				
+				"Ruby scripting via miniscript"
 		),
 		BULLET(
 			new String[]{"com.badlogicgames.gdx:gdx-bullet:$gdxVersion"},
@@ -203,7 +243,7 @@ public class DependencyBank {
 
 	public enum ProjectType {
 		CORE("core", new String[]{"java"}),
-		DESKTOP("desktop", new String[]{"java", "application", "org.mini2Dx.parcl"}),
+		DESKTOP("desktop", new String[]{"java", "application", "org.mini2Dx.parcl", "org.mini2Dx.butler"}),
 		ANDROID("android", new String[]{"android"}),
 		IOS("ios", new String[]{"java", "robovm"});
 
