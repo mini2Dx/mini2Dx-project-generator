@@ -3,12 +3,13 @@ buildscript {
     	mavenLocal()
         mavenCentral()
         maven { url 'https://github.com/steffenschaefer/gwt-gradle-plugin/raw/maven-repo/' }
+        maven { url "https://oss.sonatype.org/content/repositories/releases/" }
 		maven { url "https://mini2dx.org/maven/content/repositories/thirdparty/" }
 		maven { url "https://mini2dx.org/maven/content/repositories/releases/" }
         jcenter()
     }
     dependencies {
-		classpath 'org.mini2Dx:parcl:1.0.7'
+		classpath 'org.mini2Dx:parcl:1.0.8'
     }
 }
 
@@ -95,6 +96,7 @@ parcl {
 	linux {
 		vmArgs = ["-Xmx512m"]
 		binName = "mini2Dx-project-generator"
+		preferSystemJre = true
 		
 		withJre("${org.gradle.internal.jvm.Jvm.current().javaHome}")
 	}
