@@ -1,3 +1,9 @@
+[1.2.0]
+- Added message bus and scripting library options
+- Added itch.io gradle-butler-plugin to build.gradle
+- Updated branding to match latest mini2Dx branding
+- Updated templates to match mini2Dx 1.3.0
+
 [1.1.0]
 - Updated templates to match mini2Dx 1.2.0
 - Replaced Ashley with mini2Dx's Artemis ODB integration option

@@ -88,7 +88,7 @@ parcl {
 		applicationCategory = "public.app-category.developer-tools"
 		displayName = 'mini2Dx Project Generator'
 		identifier = 'org.mini2Dx.setup'
-		copyright = 'Copyright 2015 mini2Dx'
+		copyright = 'Copyright 2016 mini2Dx'
 		
 		withJre("${org.gradle.internal.jvm.Jvm.current().javaHome}")
 	}
