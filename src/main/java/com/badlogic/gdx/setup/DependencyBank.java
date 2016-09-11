@@ -19,13 +19,13 @@ public class DependencyBank {
 	static String parclPluginImport = "org.mini2Dx:parcl:";
 	static String gradleButlerPluginImport = "org.mini2Dx:butler:";
 	static String gwtPluginImport = "de.richsource.gradle.plugins:gwt-gradle-plugin:0.6";
-	static String androidPluginImport = "com.android.tools.build:gradle:1.5.0";
-	static String roboVMPluginImport = "org.robovm:robovm-gradle-plugin:";
+	static String androidPluginImport = "com.android.tools.build:gradle:2.1.3";
+	static String roboVMPluginImport = "com.mobidevelop.robovm:robovm-gradle-plugin:";
 	
 	//Extension versions
 	static String box2DLightsVersion = "1.4";
 	static String ashleyVersion = "1.7.0";
-	static String aiVersion = "1.9.0";
+	static String aiVersion = "1.8.0";
 
 	HashMap<ProjectDependency, Dependency> gdxDependencies = new HashMap<ProjectDependency, Dependency>();
 
@@ -54,13 +54,24 @@ public class DependencyBank {
 	 *
 	 * @see Dependency for the object that handles sub-module dependencies. If no dependency is found for a sub-module, ie
 	 * FreeTypeFont for gwt, an exception is thrown so the user can be notified of incompatability
-	 */
+	 */	
 	public enum ProjectDependency {
 		MINI2DX(
 			new String[]{"org.mini2Dx:mini2Dx-core:$mini2DxVersion"},
 			new String[]{"org.mini2Dx:mini2Dx-desktop:$mini2DxVersion"},
-			new String[]{"org.mini2Dx:mini2Dx-android:$mini2DxVersion", "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi", "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi-v7a", "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86"},
-			new String[]{"org.mini2Dx:mini2Dx-ios:$mini2DxVersion", "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-ios"},
+			new String[]{"org.mini2Dx:mini2Dx-android:$mini2DxVersion", 
+					"com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi", 
+					"com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi-v7a",
+					"com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-arm64-v8a",
+					"com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86",
+					"com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86_64",
+					"com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-armeabi", 
+					"com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-armeabi-v7a",
+					"com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-arm64-v8a",
+					"com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86",
+					"com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86_64"},
+			new String[]{"org.mini2Dx:mini2Dx-ios:$mini2DxVersion", 
+					"com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-ios"},
 			null,
 			null,
 			
