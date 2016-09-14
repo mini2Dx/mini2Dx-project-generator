@@ -48,36 +48,35 @@ public class Releases {
 	public static void fetchData() {
 		Scanner urlScanner = null;
 		try {
-			throw new Exception();
-//			urlScanner = new Scanner(
-//					new URL("https://raw.githubusercontent.com/mini2Dx/mini2Dx/master/RELEASES").openStream(), "UTF-8");
-//			urlScanner.useDelimiter("\\A");
-//			String[] contents = urlScanner.next().split("\n");
-//
-//			InputStream stream = Releases.class.getClassLoader().getResourceAsStream("VERSION");
-//			Version setupToolVersion = Version.valueOf(new Scanner(stream).useDelimiter("\\A").next());
-//			System.out.println("Project Generator Version: " + setupToolVersion);
-//
-//			if (setupToolVersion.getPreReleaseVersion().equals("SNAPSHOT")) {
-//				COMPATIBLE_SETUP_TOOL = true;
-//			} else {
-//				Version requiredSetupToolVersion = Version
-//						.valueOf(contents[0].substring(contents[0].indexOf(':') + 1).trim());
-//				COMPATIBLE_SETUP_TOOL = setupToolVersion.greaterThanOrEqualTo(requiredSetupToolVersion);
-//				System.out.println("Required Project Generator Version: " + requiredSetupToolVersion);
-//			}
-//
-//			List<Release> activeReleases = new ArrayList<Release>();
-//			for (int i = 0; i < contents.length - 1; i++) {
-//				Release release = new Release(contents[i + 1]);
-//				if (release.isDeprecated()) {
-//					System.out.println("Ignoring deprecated release: " + release);
-//					continue;
-//				}
-//				System.out.println("Found " + release);
-//				activeReleases.add(release);
-//			}
-//			RELEASES = activeReleases.toArray(RELEASES);
+			urlScanner = new Scanner(
+					new URL("https://raw.githubusercontent.com/mini2Dx/mini2Dx/master/RELEASES").openStream(), "UTF-8");
+			urlScanner.useDelimiter("\\A");
+			String[] contents = urlScanner.next().split("\n");
+
+			InputStream stream = Releases.class.getClassLoader().getResourceAsStream("VERSION");
+			Version setupToolVersion = Version.valueOf(new Scanner(stream).useDelimiter("\\A").next());
+			System.out.println("Project Generator Version: " + setupToolVersion);
+
+			if (setupToolVersion.getPreReleaseVersion().equals("SNAPSHOT")) {
+				COMPATIBLE_SETUP_TOOL = true;
+			} else {
+				Version requiredSetupToolVersion = Version
+						.valueOf(contents[0].substring(contents[0].indexOf(':') + 1).trim());
+				COMPATIBLE_SETUP_TOOL = setupToolVersion.greaterThanOrEqualTo(requiredSetupToolVersion);
+				System.out.println("Required Project Generator Version: " + requiredSetupToolVersion);
+			}
+
+			List<Release> activeReleases = new ArrayList<Release>();
+			for (int i = 0; i < contents.length - 1; i++) {
+				Release release = new Release(contents[i + 1]);
+				if (release.isDeprecated()) {
+					System.out.println("Ignoring deprecated release: " + release);
+					continue;
+				}
+				System.out.println("Found " + release);
+				activeReleases.add(release);
+			}
+			RELEASES = activeReleases.toArray(RELEASES);
 		} catch (Exception e) {
 			e.printStackTrace();
 
