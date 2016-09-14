@@ -35,7 +35,7 @@ public class Releases {
 	private static final String BASE_ANDROID_API_VERSION = "21";
 	private static final String BASE_MINIBUS_VERSION = "1.1.0";
 	private static final String BASE_MINISCRIPT_VERSION = "1.0.0-beta1";
-	private static final String BASE_PARCL_VERSION = "1.0.8";
+	private static final String BASE_PARCL_VERSION = "1.0.10";
 	private static final String BASE_GRADLE_BUTLER_PLUGIN_VERSION = "1.0.1";
 
 	private static final Release BASE_RELEASE = new Release(BASE_MINI2DX_VERSION, BASE_LIBGDX_VERSION,

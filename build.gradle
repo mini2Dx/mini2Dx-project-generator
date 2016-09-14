@@ -9,7 +9,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-		classpath 'org.mini2Dx:parcl:1.0.9'
+		classpath 'org.mini2Dx:parcl:1.0.10'
     }
 }
 
