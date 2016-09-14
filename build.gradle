@@ -9,7 +9,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-		classpath 'org.mini2Dx:parcl:1.0.8'
+		classpath 'org.mini2Dx:parcl:1.0.9'
     }
 }
 
@@ -21,7 +21,7 @@ apply plugin: "application"
 apply plugin: "org.mini2Dx.parcl"
     
 group = 'org.mini2Dx'
-version = '1.2.0-SNAPSHOT'
+version = '1.2.0'
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
