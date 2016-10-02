@@ -1,3 +1,6 @@
+[1.2.1]
+- Fixed generated projects not building on 32 bit Windows
+
 [1.2.0]
 - Added message bus and scripting library options
 - Added itch.io gradle-butler-plugin to build.gradle
