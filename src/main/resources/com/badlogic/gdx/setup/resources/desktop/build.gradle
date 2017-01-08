@@ -4,7 +4,7 @@ sourceCompatibility = 1.7
 sourceSets.main.java.srcDirs = [ "src/" ]
 
 mainClassName = "%PACKAGE%.desktop.DesktopLauncher"
-project.ext.assetsDir = new File("../%ASSET_PATH%");
+project.ext.assetsDir = new File("$projectDir/../%ASSET_PATH%");
 
 sourceSets.main.resources.srcDirs = [project.ext.assetsDir.getAbsolutePath()]
 
