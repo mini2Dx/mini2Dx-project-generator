@@ -21,10 +21,6 @@ public class BuildScriptHelper {
 		write(wr, DependencyBank.jCenter);
 		write(wr, "maven { url \"" + DependencyBank.libGDXSnapshotsUrl + "\" }");
 		write(wr, "maven { url \"" + DependencyBank.libGDXReleaseUrl + "\" }");
-		if(projects.contains(ProjectType.DESKTOP)) {
-			write(wr, "maven { url \"" + DependencyBank.mini2DxThirdPartyUrl + "\" }");
-			write(wr, "maven { url \"" + DependencyBank.mini2DxReleaseUrl + "\" }");
-		}
 		//		if (projects.contains(ProjectType.HTML)) {
 		//			write(wr, DependencyBank.jCenter);
 		//		}
@@ -73,8 +69,6 @@ public class BuildScriptHelper {
 		write(wr, DependencyBank.mavenCentral);
 		write(wr, "maven { url \"" + DependencyBank.libGDXSnapshotsUrl + "\" }");
 		write(wr, "maven { url \"" + DependencyBank.libGDXReleaseUrl + "\" }");
-		write(wr, "maven { url \"" + DependencyBank.mini2DxThirdPartyUrl + "\" }");
-		write(wr, "maven { url \"" + DependencyBank.mini2DxReleaseUrl + "\" }");
 		write(wr, "}");
 		write(wr, "}");
 	}
