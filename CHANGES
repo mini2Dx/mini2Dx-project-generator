@@ -1,3 +1,6 @@
+[1.2.2]
+- Removed deprecated mini2Dx repo, use Maven Central instead
+
 [1.2.1]
 - Fixed generated projects not building on 32 bit Windows
 
