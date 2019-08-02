@@ -9,6 +9,7 @@ public class DependencyBank {
 	static String mavenLocal = "mavenLocal()";
 	static String mavenCentral = "mavenCentral()";
 	static String jCenter = "jcenter()";
+	static String google = "https://maven.google.com/";
 	static String libGDXSnapshotsUrl = "https://oss.sonatype.org/content/repositories/snapshots/";
 	static String libGDXReleaseUrl = "https://oss.sonatype.org/content/repositories/releases/";
 
@@ -16,7 +17,7 @@ public class DependencyBank {
 	static String parclPluginImport = "org.mini2Dx:parcl:";
 	static String gradleButlerPluginImport = "org.mini2Dx:butler:";
 	static String gwtPluginImport = "de.richsource.gradle.plugins:gwt-gradle-plugin:0.6";
-	static String androidPluginImport = "com.android.tools.build:gradle:2.1.3";
+	static String androidPluginImport = "com.android.tools.build:gradle:3.4.2";
 	static String roboVMPluginImport = "com.mobidevelop.robovm:robovm-gradle-plugin:";
 	
 	//Extension versions
