@@ -1,3 +1,7 @@
+[1.2.3]
+- Update templates to use latest android plugins
+- Add jcenter mirrors
+
 [1.2.2]
 - Removed deprecated mini2Dx repo, use Maven Central instead
 
