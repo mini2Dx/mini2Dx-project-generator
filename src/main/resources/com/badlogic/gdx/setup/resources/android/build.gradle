@@ -20,7 +20,7 @@ android {
 		exclude 'rebel.xml'
 	}
     defaultConfig {
-        targetSdkVersion 29
+        targetSdkVersion %API_LEVEL%
         minSdkVersion 21
     }
 }
