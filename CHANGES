@@ -1,3 +1,6 @@
+[1.2.4]
+- Move minSdkVersion from Manifest to gradle script (thanks Mauro Coppola)
+
 [1.2.3]
 - Update templates to use latest android plugins
 - Add jcenter mirrors
