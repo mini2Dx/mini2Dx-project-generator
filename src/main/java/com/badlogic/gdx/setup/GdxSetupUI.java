@@ -92,12 +92,12 @@ import com.badlogic.gdx.setup.Executor.CharCallback;
 @SuppressWarnings("serial")
 public class GdxSetupUI extends JFrame {
 
-	DependencyBank dependencyBank;
-	List<ProjectType> modules = new ArrayList<ProjectType>();
-	List<Dependency> dependencies = new ArrayList<Dependency>();
+	private DependencyBank dependencyBank;
+	private List<ProjectType> modules = new ArrayList<>();
+	private List<Dependency> dependencies = new ArrayList<>();
 
-	UI ui;
-	static Point point = new Point();
+	private UI ui;
+	private static Point point = new Point();
 
 	public GdxSetupUI () {
 		if(!Releases.isCompatibleSetupTool()) {
@@ -111,7 +111,7 @@ public class GdxSetupUI extends JFrame {
 		
 		dependencyBank = new DependencyBank();
 		modules.add(ProjectType.CORE);
-		dependencies.add(dependencyBank.getDependency(ProjectDependency.MINI2DX));
+		dependencies.add(dependencyBank.getDependency(ProjectDependency.MINI2DXV2));
 		dependencies.add(dependencyBank.getDependency(ProjectDependency.TILED));
 		dependencies.add(dependencyBank.getDependency(ProjectDependency.ARTEMIS));
 		dependencies.add(dependencyBank.getDependency(ProjectDependency.UI));
@@ -141,7 +141,7 @@ public class GdxSetupUI extends JFrame {
 		setVisible(true);
 	}
 
-	void generate() {
+	private void generate() {
 		Release release = Releases.getRelease((String) ui.form.versionButton.getSelectedItem());
 		System.out.println("Using " + release);
 
@@ -209,7 +209,17 @@ public class GdxSetupUI extends JFrame {
 				return;
 			}
 		}
-
+		if (release.getMini2DxVersion().startsWith("1")){
+			int idx = dependencies.indexOf(dependencyBank.getDependency(ProjectDependency.MINI2DXV2));
+			if (idx != -1) {
+				dependencies.set(idx, dependencyBank.getDependency(ProjectDependency.MINI2DX));
+			}
+		} else {
+			int idx = dependencies.indexOf(dependencyBank.getDependency(ProjectDependency.MINI2DX));
+			if (idx != -1) {
+				dependencies.set(idx, dependencyBank.getDependency(ProjectDependency.MINI2DXV2));
+			}
+		}
 		final ProjectBuilder builder = new ProjectBuilder(name, dependencyBank, release);
 		List<String> incompatList = builder.buildProject(modules, dependencies);
 		if (incompatList.size() == 0) {
@@ -239,9 +249,7 @@ public class GdxSetupUI extends JFrame {
 					if (e.getEventType().equals(HyperlinkEvent.EventType.ACTIVATED))
 						try {
 							Desktop.getDesktop().browse(new URI(e.getURL().toString()));
-						} catch (IOException e1) {
-							e1.printStackTrace();
-						} catch (URISyntaxException e1) {
+						} catch (IOException | URISyntaxException e1) {
 							e1.printStackTrace();
 						}
 				}
@@ -295,7 +303,7 @@ public class GdxSetupUI extends JFrame {
 		}.start();
 	}
 
-	void log(final char c) {
+	private void log(final char c) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				ui.textArea.append("" + c);
@@ -304,7 +312,7 @@ public class GdxSetupUI extends JFrame {
 		});
 	}
 
-	void log(final String text) {
+	private void log(final String text) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				ui.textArea.append(text + "\n");
@@ -343,7 +351,6 @@ public class GdxSetupUI extends JFrame {
 					Border pad = new EmptyBorder(0, 5, 0, 0);
 					CompoundBorder compoundBorder = new CompoundBorder(line, pad);
 					((JComponent) component).setBorder(compoundBorder);
-					continue;
 				}
 			}
 			buttonPanel.setBackground(new Color(239, 239, 239));
@@ -478,19 +485,19 @@ public class GdxSetupUI extends JFrame {
 		JPanel subProjectsPanel = new JPanel(new GridLayout());
 		JLabel versionLabel = new JLabel("mini2Dx Version");
 
-		JComboBox versionButton;
+		JComboBox<String> versionButton;
 
 		{
 			String[] releaseItems = new String[Releases.getReleases().length];
 			for (int i = 0; i < releaseItems.length; i++) {
 				releaseItems[i] = Releases.getReleases()[i].getMini2DxVersion();
 			}
-			versionButton = new JComboBox(releaseItems);
+			versionButton = new JComboBox<>(releaseItems);
 		}
 
 		JLabel projectsLabel = new JLabel("Sub Projects");
-		JLabel extensionsLabel = new JLabel("mini2Dx / LibGDX Extensions");
-		List<JPanel> extensionsPanels = new ArrayList<JPanel>();
+		JLabel extensionsLabel = new JLabel("mini2Dx Extensions");
+		List<JPanel> extensionsPanels = new ArrayList<>();
 		SetupButton showMoreExtensionsButton = new SetupButton("Show Third Party Extensions");
 
 		{
@@ -598,9 +605,7 @@ public class GdxSetupUI extends JFrame {
 						if (box.isSelected()) {
 							modules.add(projectType);
 						} else {
-							if (modules.contains(projectType)) {
-								modules.remove(projectType);
-							}
+							modules.remove(projectType);
 						}
 					}
 				});
@@ -617,21 +622,20 @@ public class GdxSetupUI extends JFrame {
 				while (depCounter < ProjectDependency.values().length) {
 					if (ProjectDependency.values()[depCounter] != null) {
 						final ProjectDependency projDep = ProjectDependency.values()[depCounter];
-						if (projDep.equals(ProjectDependency.MINI2DX)) {
+						if (projDep.equals(ProjectDependency.MINI2DX) || projDep.equals(ProjectDependency.MINI2DXV2)) {
 							depCounter++;
 							continue;
 						}
 						String[] labelComponents = projDep.name().split("_");
-						String label = "";
+						StringBuilder label = new StringBuilder();
 						for (int i = 0; i < labelComponents.length; i++) {
-							label += labelComponents[i].substring(0, 1)
-									+ labelComponents[i].substring(1, labelComponents[i].length()).toLowerCase();
+							label.append(labelComponents[i], 0, 1).append(labelComponents[i].substring(1).toLowerCase());
 							if (i < labelComponents.length - 1) {
-								label += " ";
+								label.append(" ");
 							}
 						}
 
-						SetupCheckBox depCheckBox = new SetupCheckBox(label);
+						SetupCheckBox depCheckBox = new SetupCheckBox(label.toString());
 						depCheckBox.setToolTipText(projDep.getDescription());
 						if (projDep.equals(ProjectDependency.TILED)) {
 							depCheckBox.setSelected(true);
@@ -650,9 +654,7 @@ public class GdxSetupUI extends JFrame {
 								if (box.isSelected()) {
 									dependencies.add(dependencyBank.getDependency(projDep));
 								} else {
-									if (dependencies.contains(dependencyBank.getDependency(projDep))) {
-										dependencies.remove(dependencyBank.getDependency(projDep));
-									}
+									dependencies.remove(dependencyBank.getDependency(projDep));
 								}
 							}
 						});
@@ -837,7 +839,7 @@ public class GdxSetupUI extends JFrame {
 		}
 	}
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
 		Releases.fetchData();
 
 		SwingUtilities.invokeLater(new Runnable() {

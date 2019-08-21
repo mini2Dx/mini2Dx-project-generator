@@ -10,13 +10,13 @@ public class DependencyBank {
 	static String mavenCentral = "mavenCentral()";
 	static String jCenter = "jcenter()";
 	static String google = "https://maven.google.com/";
+	static String jitpack = "https://jitpack.io";
 	static String libGDXSnapshotsUrl = "https://oss.sonatype.org/content/repositories/snapshots/";
 	static String libGDXReleaseUrl = "https://oss.sonatype.org/content/repositories/releases/";
 
 	//Project plugins
 	static String parclPluginImport = "org.mini2Dx:parcl:";
 	static String gradleButlerPluginImport = "org.mini2Dx:butler:";
-	static String gwtPluginImport = "de.richsource.gradle.plugins:gwt-gradle-plugin:0.6";
 	static String androidPluginImport = "com.android.tools.build:gradle:3.4.2";
 	static String roboVMPluginImport = "com.mobidevelop.robovm:robovm-gradle-plugin:";
 	
@@ -30,7 +30,6 @@ public class DependencyBank {
 	public DependencyBank() {
 		for (ProjectDependency projectDep : ProjectDependency.values()) {
 			Dependency dependency = new Dependency(projectDep.name(),
-					projectDep.getGwtInherits(),
 					projectDep.getDependencies(ProjectType.CORE),
 					projectDep.getDependencies(ProjectType.DESKTOP),
 					projectDep.getDependencies(ProjectType.ANDROID),
@@ -71,9 +70,30 @@ public class DependencyBank {
 			new String[]{"org.mini2Dx:mini2Dx-ios:$mini2DxVersion", 
 					"com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-ios"},
 			null,
-			null,
-			
-			"Core Library for mini2Dx"
+
+				"Core Library for mini2Dx"
+		),
+		MINI2DXV2(
+				new String[]{"org.mini2Dx:mini2Dx-core:$mini2DxVersion"},
+				new String[]{"org.mini2Dx:mini2Dx-libgdx-desktop:$mini2DxVersion",
+						"com.badlogicgames.gdx:gdx-tools:$gdxVersion"},
+				new String[]{"org.mini2Dx:mini2Dx-libgdx-android:$mini2DxVersion",
+						"com.android.support:multidex:$multiDexVersion",
+						"com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi",
+						"com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi-v7a",
+						"com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-arm64-v8a",
+						"com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86",
+						"com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86_64",
+						"com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-armeabi",
+						"com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-armeabi-v7a",
+						"com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-arm64-v8a",
+						"com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86",
+						"com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86_64"},
+				new String[]{"org.mini2Dx:mini2Dx-libgdx-ios:$mini2DxVersion",
+						"com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-ios"},
+				null,
+
+				"Core Library for mini2Dx"
 		),
 		TILED(
 				new String[]{"org.mini2Dx:mini2Dx-tiled:$mini2DxVersion"},
@@ -81,8 +101,7 @@ public class DependencyBank {
 				new String[]{},
 				new String[]{},
 				new String[]{},
-				new String[]{},
-				
+
 				"Tiled support for mini2Dx"
 		),
 		ARTEMIS (
@@ -91,8 +110,7 @@ public class DependencyBank {
 				new String[]{},
 				new String[]{},
 				new String[]{},
-				new String[]{},
-				
+
 				"Artemis ODB support for mini2Dx"
 		),
 		UI (
@@ -101,8 +119,7 @@ public class DependencyBank {
 				new String[]{},
 				new String[]{},
 				new String[]{},
-				new String[]{},
-				
+
 				"UI framework for mini2Dx"
 		),
 		MESSAGE_BUS (
@@ -111,8 +128,7 @@ public class DependencyBank {
 				new String[]{},
 				new String[]{},
 				new String[]{},
-				new String[]{},
-				
+
 				"Message Bus via minibus"
 		),
 		LUA_SCRIPTING (
@@ -121,8 +137,7 @@ public class DependencyBank {
 				new String[]{"com.wu-man:android-bsf-api:$androidBsfVersion"},
 				new String[]{},
 				new String[]{},
-				new String[]{},
-				
+
 				"Lua scripting via miniscript"
 		),
 		GROOVY_SCRIPTING (
@@ -131,8 +146,7 @@ public class DependencyBank {
 				new String[]{"com.wu-man:android-bsf-api:$androidBsfVersion"},
 				new String[]{},
 				new String[]{},
-				new String[]{},
-				
+
 				"Groovy scripting via miniscript"
 		),
 		PYTHON_SCRIPTING (
@@ -141,8 +155,7 @@ public class DependencyBank {
 				new String[]{"com.wu-man:android-bsf-api:$androidBsfVersion"},
 				new String[]{},
 				new String[]{},
-				new String[]{},
-				
+
 				"Python scripting via miniscript"
 		),
 		RUBY_SCRIPTING (
@@ -151,19 +164,8 @@ public class DependencyBank {
 				new String[]{"com.wu-man:android-bsf-api:$androidBsfVersion"},
 				new String[]{},
 				new String[]{},
-				new String[]{},
-				
+
 				"Ruby scripting via miniscript"
-		),
-		BULLET(
-			new String[]{"com.badlogicgames.gdx:gdx-bullet:$gdxVersion"},
-			new String[]{"com.badlogicgames.gdx:gdx-bullet-platform:$gdxVersion:natives-desktop"},
-			new String[]{"com.badlogicgames.gdx:gdx-bullet-platform:$gdxVersion:natives-armeabi", "com.badlogicgames.gdx:gdx-bullet-platform:$gdxVersion:natives-armeabi-v7a", "com.badlogicgames.gdx:gdx-bullet-platform:$gdxVersion:natives-x86"},
-			new String[]{"com.badlogicgames.gdx:gdx-bullet-platform:$gdxVersion:natives-ios"},
-			null,
-			null,
-			
-			"3D Collision Detection and Rigid Body Dynamics"
 		),
 		TOOLS(
 			new String[]{},
@@ -171,29 +173,8 @@ public class DependencyBank {
 			new String[]{},
 			new String[]{},
 			new String[]{},
-			new String[]{},
-			
-			"Collection of tools, including 2D/3D particle editors, texture packers, and file processors"
-		),
-		BOX2D(
-			new String[]{"com.badlogicgames.gdx:gdx-box2d:$gdxVersion"},
-			new String[]{"com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"},
-			new String[]{"com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-armeabi", "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-armeabi-v7a", "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-x86"},
-			new String[]{"com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-ios"},
-			new String[]{"com.badlogicgames.gdx:gdx-box2d:$gdxVersion:sources", "com.badlogicgames.gdx:gdx-box2d-gwt:$gdxVersion:sources"},
-			new String[]{"com.badlogic.gdx.physics.box2d.box2d-gwt"},
-			
-			"2D Physics Library"
-		),	
-		BOX2DLIGHTS(
-			new String[]{"com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"},
-			new String[]{},
-			new String[]{"com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"},
-			new String[]{},
-			new String[]{"com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion:sources"},
-			new String[]{"Box2DLights"},
-			
-			"2D Lighting framework that utilises Box2D"
+
+				"Collection of tools, including 2D/3D particle editors, texture packers, and file processors"
 		),
 		AI(
 			new String[]{"com.badlogicgames.gdx:gdx-ai:$aiVersion"},
@@ -201,26 +182,21 @@ public class DependencyBank {
 			new String[]{"com.badlogicgames.gdx:gdx-ai:$aiVersion"},
 			new String[]{},
 			new String[]{"com.badlogicgames.gdx:gdx-ai:$aiVersion:sources"},
-			new String[]{"com.badlogic.gdx.ai"},
-			
-			"Artificial Intelligence framework"
+
+				"Artificial Intelligence framework"
 		);
 
 		private String[] coreDependencies;
 		private String[] desktopDependencies;
 		private String[] androidDependencies;
 		private String[] iosDependencies;
-		private String[] gwtDependencies;
-		private String[] gwtInherits;
 		private String description;
 
-		ProjectDependency(String[] coreDeps, String[] desktopDeps, String[] androidDeps, String[] iosDeps, String[] gwtDeps, String[] gwtInhertis, String description) {
+		ProjectDependency(String[] coreDeps, String[] desktopDeps, String[] androidDeps, String[] iosDeps, String[] gwtDeps, String description) {
 			this.coreDependencies = coreDeps;
 			this.desktopDependencies = desktopDeps;
 			this.androidDependencies = androidDeps;
 			this.iosDependencies = iosDeps;
-			this.gwtDependencies = gwtDeps;
-			this.gwtInherits = gwtInhertis;
 			this.description = description;
 		}
 
@@ -234,16 +210,10 @@ public class DependencyBank {
 					return androidDependencies;
 				case IOS:
 					return iosDependencies;
-				//				case HTML:
-				//					return gwtDependencies;
 			}
 			return null;
 		}
-		
-		public String[] getGwtInherits() {
-			return gwtInherits;
-		}
-		
+
 		public String getDescription() {
 			return description;
 		}

@@ -1,0 +1,18 @@
+package %PACKAGE%.android;
+
+import android.os.Bundle;
+
+import com.badlogic.gdx.backends.android.AndroidMini2DxGame;
+
+import org.mini2Dx.android.AndroidMini2DxConfig;
+
+import %PACKAGE%.%MAIN_CLASS%;
+
+public class AndroidLauncher extends AndroidMini2DxGame {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        AndroidMini2DxConfig config = new AndroidMini2DxConfig(%MAIN_CLASS%.GAME_IDENTIFIER);
+        initialize(new %MAIN_CLASS%(), config);
+    }
+}

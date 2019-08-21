@@ -67,11 +67,18 @@ public class ProjectBuilder {
 
 			FileWriter buildWriter = new FileWriter(buildFile.getAbsoluteFile());
 			BufferedWriter buildBw = new BufferedWriter(buildWriter);
-
-			BuildScriptHelper.addBuildScript(modules, buildBw, release);
-			BuildScriptHelper.addAllProjects(buildBw, release);
-			for (ProjectType module : modules) {
-				BuildScriptHelper.addProject(module, dependencies, buildBw);
+			if (release.getMini2DxVersion().startsWith("1")) {
+				BuildScriptV1Helper.addBuildScript(modules, buildBw, release);
+				BuildScriptV1Helper.addAllProjects(buildBw, release);
+				for (ProjectType module : modules) {
+					BuildScriptV1Helper.addProject(module, dependencies, buildBw);
+				}
+			} else {
+				BuildScriptV2Helper.addBuildScript(modules, buildBw, release);
+				BuildScriptV2Helper.addAllProjects(buildBw, release);
+				for (ProjectType module : modules) {
+					BuildScriptV2Helper.addProject(module, dependencies, buildBw);
+				}
 			}
 
 			//Add task here for now

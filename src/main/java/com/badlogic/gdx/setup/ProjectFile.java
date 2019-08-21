@@ -45,6 +45,12 @@ public class ProjectFile {
 		this.outputName = name;
 		this.isTemplate = isTemplate;
 	}
+
+	public ProjectFile(String resourceName, String outputName) {
+		this.resourceName = resourceName;
+		this.outputName = outputName;
+		this.isTemplate = true;
+	}
 	
 	public ProjectFile(String resourceName, String outputName, boolean isTemplate) {
 		this.resourceName = resourceName;

@@ -28,19 +28,12 @@ import com.github.zafarkhaja.semver.Version;
  * if this tool is compatible with the releases listed.
  */
 public class Releases {
-	private static final String BASE_MINI2DX_VERSION = "1.3.0-rc2";
-	private static final String BASE_LIBGDX_VERSION = "1.9.4";
-	private static final String BASE_ROBOVM_VERSION = "2.2.0";
-	private static final String BASE_ANDROID_BUILD_TOOLS_VERSION = "23.0.1";
-	private static final String BASE_ANDROID_API_VERSION = "21";
-	private static final String BASE_MINIBUS_VERSION = "1.1.0";
-	private static final String BASE_MINISCRIPT_VERSION = "1.0.0-beta1";
-	private static final String BASE_PARCL_VERSION = "1.0.10";
-	private static final String BASE_GRADLE_BUTLER_PLUGIN_VERSION = "1.0.1";
+	private static final String RELEASES_URL = "https://raw.githubusercontent.com/mini2Dx/mini2Dx/master/RELEASES";
 
-	private static final Release BASE_RELEASE = new Release(BASE_MINI2DX_VERSION, BASE_LIBGDX_VERSION,
-			BASE_ROBOVM_VERSION, BASE_ANDROID_BUILD_TOOLS_VERSION, BASE_ANDROID_API_VERSION, BASE_MINIBUS_VERSION,
-			BASE_MINISCRIPT_VERSION, BASE_PARCL_VERSION, BASE_GRADLE_BUTLER_PLUGIN_VERSION);
+	private static final Release[] BASE_RELEASES = new Release[]{
+			new Release("2.0.0-alpha.3", "1.9.8", "2.3.7", "21.0.0", "21", "1.1.1", "1.3.0", "1.6.1", "1.1.3"),
+			new Release("1.9.10", "1.9.8", "2.3.7", "21.0.0", "21", "1.1.1", "1.3.0", "1.6.1", "1.1.3")
+	};
 
 	private static boolean COMPATIBLE_SETUP_TOOL;
 	private static Release[] RELEASES = new Release[1];
@@ -49,7 +42,7 @@ public class Releases {
 		Scanner urlScanner = null;
 		try {
 			urlScanner = new Scanner(
-					new URL("https://raw.githubusercontent.com/mini2Dx/mini2Dx/master/RELEASES").openStream(), "UTF-8");
+					new URL(RELEASES_URL).openStream(), "UTF-8");
 			urlScanner.useDelimiter("\\A");
 			String[] contents = urlScanner.next().split("\n");
 
@@ -81,7 +74,7 @@ public class Releases {
 			e.printStackTrace();
 
 			COMPATIBLE_SETUP_TOOL = true;
-			RELEASES = new Release[] { BASE_RELEASE };
+			RELEASES = BASE_RELEASES;
 		} finally {
 			if (urlScanner != null) {
 				urlScanner.close();

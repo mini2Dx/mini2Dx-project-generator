@@ -1,0 +1,27 @@
+package %PACKAGE%;
+
+import org.mini2Dx.core.Graphics;
+import org.mini2Dx.core.Mdx;
+import org.mini2Dx.core.game.BasicGame;
+import org.mini2Dx.core.graphics.Texture;
+
+public class %MAIN_CLASS% extends BasicGame {
+	public static final String GAME_IDENTIFIER = "%GAME_IDENTIFIER%";
+
+	private Texture texture;
+	
+	@Override
+    public void initialise() {
+    	texture = Mdx.graphics.newTexture(Mdx.files.internal("mini2Dx.png"));
+    }
+
+    @Override
+    public void update(float delta) {
+    
+    }
+    
+    @Override
+    public void render(Graphics g) {
+		g.drawTexture(texture, 0f, 0f);
+    }
+}
